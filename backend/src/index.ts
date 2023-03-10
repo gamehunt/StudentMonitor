@@ -5,16 +5,18 @@ import express from 'express'
 
 dotenv.config()
 
-const app     = express()
-const port    = process.env.PORT
+const app         = express()
+const root_router = express.Router()
+const port        = process.env.PORT
 
 AppDataSource.initialize().then(async () => {
-    app.get('/', (req, res) => {
-        res.send('Hello World!')
+    app.use('/api', root_router)
+
+    root_router.get('/', async (req, res) => {
+        res.send('TEST')
     })
       
     app.listen(port, () => {
-        console.log(`Example app listening on port ${port}`)
+        console.log(`Listening on port ${port}`)
     })
-
 }).catch(error => console.log(error))
