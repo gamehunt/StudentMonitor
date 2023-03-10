@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { UserService } from './services/user.service';
 
@@ -13,14 +13,22 @@ export class AppComponent {
 
   ngOnInit(){
     if(!this.userService.isLoggedIn()){
-      this.openLoginModal()
+      let ref = this.openLoginModal()
+
+      ref.afterClosed().subscribe(result => {
+        this.userService.logIn(result.login, result.password)
+      });
     }
   }
 
-  openLoginModal(){
-    this.dialog.open(LoginModalComponent, {
+  openLoginModal(): MatDialogRef<LoginModalComponent> {
+    return this.dialog.open(LoginModalComponent, {
       width: '340px',
-      disableClose: true
+      disableClose: true,
+      data: {
+        login: "",
+        password: ""
+      }
     })
   }
 }

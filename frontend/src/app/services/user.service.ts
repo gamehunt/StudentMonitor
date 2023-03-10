@@ -9,4 +9,8 @@ export class UserService {
   isLoggedIn(): boolean {
     return false
   }
+
+  logIn(user: string, password: string){
+    console.log(`Logging in with ${user} and ${password}`)
+  }
 }

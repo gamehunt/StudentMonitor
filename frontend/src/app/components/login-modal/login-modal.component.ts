@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface DialogData {
+  login:    string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login-modal',
@@ -7,5 +12,5 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent {
-  constructor(public dialogRef: MatDialogRef<LoginModalComponent>) {}
+  constructor(public dialogRef: MatDialogRef<LoginModalComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
