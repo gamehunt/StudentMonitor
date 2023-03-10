@@ -6,3 +6,26 @@
     flex-direction: row;
     align-items: center;
 }
+
+.header-icon {
+    padding: 8px
+}
+
+.logged-as {
+    margin-left: auto;
+    padding: 8px;
+    color: white 
+}
+
+.logged-as-button {
+    font-size: 12pt;
+    color: white !important
+}
+
+.logged-as-role {
+    padding-right: 8px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+    padding: 0 !important;
+}

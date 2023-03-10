@@ -25,6 +25,8 @@ export class AppComponent {
     return this.dialog.open(LoginModalComponent, {
       width: '340px',
       disableClose: true,
+      ariaModal: true,
+      backdropClass: "modal-backdrop",
       data: {
         login: "",
         password: ""

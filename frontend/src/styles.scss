@@ -38,6 +38,7 @@ $project-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.cdk-overlay-backdrop {
-  backdrop-filter: blur(8px);
+
+.modal-backdrop {
+    backdrop-filter: blur(16px);
 }

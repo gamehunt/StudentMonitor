@@ -7,7 +7,7 @@ export class UserService {
   constructor() { }
 
   isLoggedIn(): boolean {
-    return false
+    return true
   }
 
   logIn(user: string, password: string){

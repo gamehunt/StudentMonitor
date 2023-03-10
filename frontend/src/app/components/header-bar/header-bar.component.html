@@ -1,1 +1,8 @@
-<p>header-bar works!</p>
+<img src="assets/favicon.ico" class="header-icon">
+<div class="logged-as">
+    <span class="logged-as-role">Преподаватель:</span>
+    <button mat-button [matMenuTriggerFor]="menu" class="logged-as-button">Демаков М.А</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>Настройки</button>
+    </mat-menu>
+</div>

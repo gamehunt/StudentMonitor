@@ -1,0 +1,30 @@
+.day-card {
+    background-color: #008ae6;
+    min-width: 350px;
+    border-radius: 16px;
+}
+
+mat-card-header {
+    background-color: #00548b;
+    border-radius: 16px 16px 0 0;
+    justify-content: center;
+    padding: 8px 0px 8px 0px;
+}
+
+mat-card-title {
+    color: white;
+    font-size: 14pt;
+}
+
+.lesson {
+    border: 4px black;
+    border-radius: 4px;
+    &:hover {
+        background-color: #00548b;
+    }
+    button {
+        width: 100%;
+        font-size: 12pt;
+        color: white;
+    }
+}

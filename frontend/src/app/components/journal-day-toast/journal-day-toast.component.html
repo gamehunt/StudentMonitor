@@ -1,0 +1,16 @@
+<mat-card class="day-card" [ngStyle]="{'background-color': (isActive) ? '#fc8400' : '#008ae6'}">
+  <mat-card-header [ngStyle]="{'background-color': (isActive) ? '#b35c00' : '#00548b'}">
+    <mat-card-title>{{ getDate() }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item
+        role = "listitem"
+        class = "lesson"
+        *ngFor="let lesson of [1, 2, 3, 4, 5, 6]"
+      >
+      <button mat-button color="primary">{{ lesson }} 111111111111111111111</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
