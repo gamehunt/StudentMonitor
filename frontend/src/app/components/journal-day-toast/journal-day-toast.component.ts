@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, Inject, Input, SimpleChanges } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { LessonQueryResult, Lesson, LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
   selector: 'app-journal-day-toast',
@@ -8,29 +9,16 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
   styleUrls: ['./journal-day-toast.component.scss']
 })
 export class JournalDayToastComponent {
-    constructor(@Inject(MAT_DATE_LOCALE) private _locale: string) {}
+    constructor(private lessonsService: LessonsService, @Inject(MAT_DATE_LOCALE) private _locale: string) {}
 
     @Input()
     date: Date = new Date()
 
     @Input()
-    currentDate: Date = new Date()
-
     isActive: boolean = false
 
-    ngOnInit(){
-        this.isActive = this.checkIsActive()
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        this.ngOnInit()
-    }
-
-    checkIsActive(){
-        return  this.date.getDay()      == this.currentDate.getDay()   &&
-                this.date.getMonth()    == this.currentDate.getMonth() &&
-                this.date.getFullYear() == this.currentDate.getFullYear();
-    }
+    @Input()
+    lessons: LessonQueryResult = []
 
     getDate()
     {

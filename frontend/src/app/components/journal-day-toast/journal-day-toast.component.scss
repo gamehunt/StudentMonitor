@@ -1,6 +1,7 @@
 .day-card {
     background-color: #008ae6;
     min-width: 350px;
+    min-height: 360px;
     border-radius: 16px;
 }
 
@@ -27,4 +28,17 @@ mat-card-title {
         font-size: 12pt;
         color: white;
     }
+}
+
+.lesson-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+}
+
+.empty-lesson {
+    width: 100%;
+    text-align: center;
+    font-size: 24pt;
 }

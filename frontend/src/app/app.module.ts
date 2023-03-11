@@ -21,6 +21,7 @@ import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,

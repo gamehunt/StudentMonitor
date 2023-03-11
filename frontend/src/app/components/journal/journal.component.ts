@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Lesson, LessonsService, LessonQueryResult } from 'src/app/services/lessons.service';
 
 @Component({
   templateUrl: './journal.component.html',
@@ -7,15 +8,34 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class JournalComponent {
   smallScreen: boolean = false;
+  
   currentDate: Date = new Date();
 
-  constructor(private responsive: BreakpointObserver,
-              private changeDetectorRef: ChangeDetectorRef) {}
+  lessons: LessonQueryResult[] = []
+
+  monday: Date = new Date()
+
+  constructor(private responsive: BreakpointObserver, private lessonsService: LessonsService) {}
 
   ngOnInit() {
     this.responsive.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((result) => {
         this.smallScreen = result.matches;
     });
+    this.monday = this.getMonday(this.currentDate)
+    this.lessonsService.getLessons(false).subscribe((r: LessonQueryResult[]) => {
+        this.lessons = r;
+    })
+  }
+
+  ngOnChanges(){
+    this.monday = this.getMonday(this.currentDate)
+  }
+
+  checkIsActive(day: number): boolean{
+    let d = this.offsetDate(day)
+    return  d.getDate()  == this.currentDate.getDate() &&
+            d.getMonth() == this.currentDate.getMonth() &&
+            d.getFullYear() == this.currentDate.getFullYear();
   }
 
   getMonday(d: Date) {
@@ -25,7 +45,8 @@ export class JournalComponent {
     return new Date(d.setDate(diff));
   }
 
-  offsetDate(d: Date, amount: number){
+  offsetDate(amount: number){
+    let d = new Date(this.monday);
     d.setDate(d.getDate() + amount);
     return d;
   }
