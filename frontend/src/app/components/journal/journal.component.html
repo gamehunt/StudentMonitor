@@ -5,6 +5,10 @@
   <button matSuffix mat-icon-button aria-label="Reset" (click)="reset()">
     <mat-icon>close</mat-icon>
   </button>
+  <div class="separator"></div>
+  <span>{{timeString()}}</span>
+  <div class="separator"></div>
+  <button mat-flat-button color="primary">Открыть текущую пару</button>
 </mat-toolbar>
 <mat-grid-list
   [cols]="smallScreen ? 1 : 3"

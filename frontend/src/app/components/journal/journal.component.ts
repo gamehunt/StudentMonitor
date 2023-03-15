@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Lesson, LessonsService, LessonQueryResult } from 'src/app/services/lessons.service';
+import { interval, Subscription } from 'rxjs';
+import { TimeService } from 'src/app/services/time.service';
 
 @Component({
   templateUrl: './journal.component.html',
@@ -10,12 +12,17 @@ export class JournalComponent {
   smallScreen: boolean = false;
   
   currentDate: Date = new Date();
+  currentTime: Date = new Date();
 
   lessons: LessonQueryResult[] = []
 
   monday: Date = new Date()
 
-  constructor(private responsive: BreakpointObserver, private lessonsService: LessonsService) {}
+  updateSubscribtion!: Subscription
+
+  constructor(private responsive: BreakpointObserver, 
+              private lessonsService: LessonsService,
+              private timeService: TimeService) {}
 
   ngOnInit() {
     this.responsive.observe([Breakpoints.Small, Breakpoints.XSmall]).subscribe((result) => {
@@ -25,10 +32,16 @@ export class JournalComponent {
     this.lessonsService.getLessons(false).subscribe((r: LessonQueryResult[]) => {
         this.lessons = r;
     })
+    this.updateSubscribtion = interval(30 * 1000).subscribe(_ => this.updateTime());
+    this.updateTime()
   }
 
   ngOnChanges(){
     this.monday = this.getMonday(this.currentDate)
+  }
+
+  ngOnDestroy() {
+    this.updateSubscribtion.unsubscribe();
   }
 
   checkIsActive(day: number): boolean{
@@ -45,13 +58,23 @@ export class JournalComponent {
     return new Date(d.setDate(diff));
   }
 
-  offsetDate(amount: number){
+  offsetDate(amount: number) : Date{
     let d = new Date(this.monday);
     d.setDate(d.getDate() + amount);
     return d;
   }
 
-  reset(){
+  reset() : void{
     this.currentDate = new Date()
+  }
+
+  updateTime() : void{
+    this.timeService.getTime().subscribe((d: number) => {
+        this.currentTime = new Date(d)
+    })
+  }
+
+  timeString() : string {
+    return `${this.currentTime.getHours()}:${this.currentTime.getMinutes().toString().padStart(2, '0')}`
   }
 }

@@ -1,24 +1,33 @@
-<mat-card class="day-card" [ngStyle]="{'background-color': (isActive) ? '#fc8400' : '#008ae6'}">
-  <mat-card-header [ngStyle]="{'background-color': (isActive) ? '#b35c00' : '#00548b'}">
+<mat-card
+  class="day-card"
+  [ngStyle]="{ 'background-color': isActive ? '#fc8400' : '#008ae6' }"
+>
+  <mat-card-header
+    [ngStyle]="{ 'background-color': isActive ? '#b35c00' : '#00548b' }"
+  >
     <mat-card-title>{{ getDate() }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list role="list">
-      <mat-list-item
-        role = "listitem"
-        class = "lesson"
-        *ngFor="let lesson of lessons; index as i;"
-      >
-      <div class = "lesson-wrapper">
-        <div>{{i + 1}}.</div>
-        <button mat-button color="primary" *ngIf="lesson != null; else empty">{{ lesson.name }}</button>
-        <ng-template #empty> 
-            <div class = "empty-lesson">
-                -
-            </div>
-        </ng-template>
-      </div>
-      </mat-list-item>
+      <ng-container *ngFor="let lesson of lessons; index as i">
+        <mat-list-item role="listitem" class="lesson">
+          <div class="lesson-wrapper">
+            <div>{{ i + 1 }}.</div>
+            <button
+              mat-button
+              color="primary"
+              *ngIf="lesson != null; else empty"
+            >
+              {{ lesson.name }}
+            </button>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
     </mat-list>
   </mat-card-content>
 </mat-card>
+
+<ng-template #empty>
+  <div class="empty-lesson">-</div>
+</ng-template>

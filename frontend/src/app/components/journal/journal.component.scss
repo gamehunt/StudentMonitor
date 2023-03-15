@@ -3,7 +3,7 @@
 }
 
 mat-toolbar {
-    height: 32px;
+    height: 48px;
 }
 
 .days-wrapper {
@@ -12,4 +12,11 @@ mat-toolbar {
 
 .day-toast-wrapper {
     padding: 0;
+}
+
+.separator {
+    height: 80%;
+    border-left: 1px solid rgb(88, 88, 88);
+    margin: 0px 8px;
+    padding: 2px 0px;
 }

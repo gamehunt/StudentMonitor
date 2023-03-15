@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
@@ -48,6 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDividerModule,
     FormsModule
   ],
   providers: [

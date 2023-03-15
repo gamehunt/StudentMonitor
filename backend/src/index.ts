@@ -20,6 +20,11 @@ AppDataSource.initialize().then(async () => {
         res.send('TEST')
     })
 
+    root_router.get('/time', async (req, res) => {
+        res.send(Date.now().toString())
+    })
+
+
     root_router.get('/lessons', async (req, res) => {
         res.send([
             [
