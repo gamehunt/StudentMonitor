@@ -1,6 +1,16 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
+import { Group } from "./entity/Group";
+import { JournalEntry } from "./entity/JournalEntry";
+import { Lesson } from "./entity/Lesson";
+import { LessonOrder } from "./entity/LessonOrder";
+import { Role } from "./entity/Role"
+import { Session } from "./entity/Session";
 import { User } from "./entity/User"
+
+const SnakeNamingStrategy = require('typeorm-naming-strategies').SnakeNamingStrategy;
+
+const entities = [User, Role, Lesson, LessonOrder, Group, JournalEntry, Session]
 
 const ProdDataSource = new DataSource({
     type: "postgres",
@@ -11,9 +21,10 @@ const ProdDataSource = new DataSource({
     database: "student-monitor",
     synchronize: true,
     logging: false,
-    entities: [User],
+    entities: entities,
     migrations: [],
     subscribers: [],
+    namingStrategy: new SnakeNamingStrategy()
 })
 
 const DevDataSource = new DataSource({
@@ -25,9 +36,10 @@ const DevDataSource = new DataSource({
     database: "student-monitor",
     synchronize: true,
     logging: false,
-    entities: [User],
+    entities: entities,
     migrations: [],
     subscribers: [],
+    namingStrategy: new SnakeNamingStrategy()
 })
 
 export const AppDataSource = process.env.PROD ? ProdDataSource : DevDataSource
