@@ -1,9 +1,9 @@
 <img src="assets/favicon.ico" class="header-icon">
 <div class="logged-as">
     <span class="logged-as-role">Преподаватель:</span>
-    <button mat-button [matMenuTriggerFor]="menu" class="logged-as-button">Демаков М.А</button>
+    <button mat-button [matMenuTriggerFor]="menu" class="logged-as-button">{{ getName() }}</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item disabled>Настройки</button>
-      <button mat-menu-item>Выйти</button>
+      <button mat-menu-item (click)="logout()">Выйти</button>
     </mat-menu>
 </div>

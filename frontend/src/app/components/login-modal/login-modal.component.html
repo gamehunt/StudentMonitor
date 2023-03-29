@@ -9,7 +9,8 @@
         <mat-label>Password</mat-label>
         <input matInput type="password" [(ngModel)]="data.password">
     </mat-form-field>
+    <span *ngIf="isFailed" class="fail-label">Invalid login or password</span>
 </div>
 <div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="primary">Login</button>
+    <button mat-raised-button cdkFocusInitial color="primary" (click)="login()">Login</button>
 </div>

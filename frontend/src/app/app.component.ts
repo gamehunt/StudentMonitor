@@ -16,7 +16,8 @@ export class AppComponent {
       let ref = this.openLoginModal()
 
       ref.afterClosed().subscribe(result => {
-        this.userService.logIn(result.login, result.password)
+        this.userService.saveUser(result)
+        window.location.reload()
       });
     }
   }
