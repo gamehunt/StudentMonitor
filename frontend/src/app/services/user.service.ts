@@ -2,12 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Response } from '../util/response';
-
-export class User{
-    name!: string
-    role!: any
-}
+import { Response } from 'shared'
+import { User }     from 'shared'
 
 @Injectable({
   providedIn: 'root'

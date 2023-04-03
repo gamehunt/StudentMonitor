@@ -22,6 +22,10 @@ services:
     build: ./backend
     container_name: "student-monitor-backend"
     restart: always
+    environment:
+      PORT: 3000
+      ROOT_USER:     admin
+      ROOT_PASSWORD: 12345
     networks:
       - internal
     depends_on:

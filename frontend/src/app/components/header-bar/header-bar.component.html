@@ -1,9 +1,13 @@
-<img src="assets/favicon.ico" class="header-icon">
+<img src="assets/favicon.ico" class="header-icon" routerLink="/">
 <div class="logged-as">
-    <span class="logged-as-role">Преподаватель:</span>
+    <span class="logged-as-role">{{getRole()}}:</span>
     <button mat-button [matMenuTriggerFor]="menu" class="logged-as-button">{{ getName() }}</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item disabled>Настройки</button>
-      <button mat-menu-item (click)="logout()">Выйти</button>
+        <button mat-menu-item disabled>Настройки</button>
+        <button mat-menu-item routerLink="/managment/accounts"  *ngIf="hasAccountManagment()">Управление аккаунтами</button>
+        <button mat-menu-item routerLink="/managment/groups"   *ngIf="hasGroupManagment()">Управление группами</button>
+        <button mat-menu-item routerLink="/managment/lessons"  *ngIf="hasLessonsManagment()">Управление расписанием</button>
+        <button mat-menu-item routerLink="/managment/students" *ngIf="hasStudentManagment()">Управление студентами</button>
+        <button mat-menu-item (click)="logout()">Выйти</button>
     </mat-menu>
 </div>

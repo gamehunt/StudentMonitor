@@ -18,11 +18,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTableModule } from '@angular/material/table';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { BaseManagerComponent } from './components/admin/base-manager/base-manager.component';
+import { AccountManagerComponent } from './components/admin/account-manager/account-manager.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderBarComponent,
     LoginModalComponent,
     JournalComponent,
-    JournalDayToastComponent
+    JournalDayToastComponent,
+    BaseManagerComponent,
+    AccountManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
+    MatTableModule,
     FormsModule
   ],
   providers: [

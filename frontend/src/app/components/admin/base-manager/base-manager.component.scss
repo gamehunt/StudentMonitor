@@ -1,0 +1,29 @@
+:host {
+    width: 100%;
+}
+
+mat-toolbar {
+    gap: 5px;
+}
+
+.table-wrapper {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-x: auto;
+}
+
+
+.mat-mdc-row .mat-mdc-cell {
+    cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background: #48aff3;
+}
+
+.mat-column-actions {
+    border-left: 1px solid rgb(0, 96, 160);
+    text-align: center;
+}

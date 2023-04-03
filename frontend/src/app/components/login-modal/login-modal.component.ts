@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { User, UserService } from 'src/app/services/user.service';
-import { Response } from 'src/app/util/response';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user.service';
+
+import { Response } from 'shared';
+import { User }     from 'shared';
 
 export interface DialogData {
   login:    string;
