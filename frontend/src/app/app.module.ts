@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
@@ -26,6 +27,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BaseManagerComponent } from './components/admin/base-manager/base-manager.component';
 import { AccountManagerComponent } from './components/admin/account-manager/account-manager.component';
+import { AddAccountDialogComponent } from './components/admin/account-manager/dialogs/add-account-dialog/add-account-dialog.component';
+import { ConfirmationDialogComponent } from './components/admin/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { AccountManagerComponent } from './components/admin/account-manager/acco
     JournalComponent,
     JournalDayToastComponent,
     BaseManagerComponent,
-    AccountManagerComponent
+    AccountManagerComponent,
+    AddAccountDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { AccountManagerComponent } from './components/admin/account-manager/acco
     MatNativeDateModule,
     MatDividerModule,
     MatTableModule,
+    MatSelectModule,
     FormsModule
   ],
   providers: [

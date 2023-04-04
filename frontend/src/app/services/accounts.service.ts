@@ -7,9 +7,21 @@ import { Response, User } from 'shared';
 })
 export class AccountsService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getAccounts(){
-    return this.http.get<Response<User[]>>('/api/users', { withCredentials: true })
-  }
+    getAccounts(){
+        return this.http.get<Response<User[]>>('/api/users', { withCredentials: true })
+    }
+
+    deleteAccount(username: string) {
+        return this.http.delete<Response<any>>(`/api/users/${username}`, { withCredentials: true })
+    }
+
+    addAccount(data: User) {
+        return this.http.post<Response<any>>(`/api/users/${data.username}`, data, { withCredentials: true })
+    }
+
+    editAccount(data: User) {
+        return this.http.patch<Response<any>>(`/api/users/${data.username}`, data, { withCredentials: true })
+    }
 }

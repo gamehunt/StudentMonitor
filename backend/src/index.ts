@@ -16,6 +16,7 @@ import { Role } from "./entity/Role";
 
 import { ACCOUNT_MANAGMENT, ADMIN, checkPermissions } from 'shared'
 import cookieParser from "cookie-parser";
+import { USERS_ROUTER } from "./routers/UsersRouter";
 
 dotenv.config();
 
@@ -120,21 +121,14 @@ AppDataSource.initialize().then(async () => {
         res.send(Date.now().toString());
     });
 
+    root_router.use('/users', USERS_ROUTER)
+
     root_router.get("/lessons", async (req, res) => {
         let lessons = await LESSON_PROVIDER.getLessonsForWeek(
             undefined,
             Boolean(req.query.is_even)
         );
         res.send(lessons);
-    });
-
-    root_router.get("/users", async (req, res) => {
-        let user: User = req.user as User
-        if(!user || !checkPermissions(user.role.permissions, ACCOUNT_MANAGMENT)){
-            res.sendStatus(403)
-            return
-        }
-        res.send({ok: true, data: await USER_PROVIDER.getUsers()});
     });
 
     root_router.get("/students", async (req, res) => {

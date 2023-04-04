@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 export class Column {
     id!: string
@@ -15,6 +17,8 @@ export class Layout {
 })
 export class BaseManagerComponent {
     data: any[][] = []
+
+    constructor(public dialog: MatDialog) {}
 
     getLayout(): Layout | null { return null; }
     fetchData(): void { this.data = [] }
@@ -37,6 +41,18 @@ export class BaseManagerComponent {
         this.fetchData()
     }
 
+    _delete(data: any) {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {
+            text: 'Delete entry?'
+        }})
+        dialogRef.afterClosed().subscribe(result => {
+            if(result) {
+                this.delete(data)
+            }
+        })
+    }
+
     add() {}
     edit(data: any) {}
+    delete(data: any) {}
 }

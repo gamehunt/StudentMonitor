@@ -34,6 +34,7 @@ export function checkPermissions(roleOrPerms: Role | number, permissions: number
 }
 
 export class User{
+    id!: number
     username!: string
     password!: string
     fio!: string
