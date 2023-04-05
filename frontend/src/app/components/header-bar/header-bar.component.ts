@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ACCOUNT_MANAGMENT, checkPermissions, GROUP_MANAGMENT, LESSON_MANAGMENT, STUDENT_MANAGMENT } from 'shared';
+import { ACCOUNT_MANAGMENT, checkPermissions, GROUP_MANAGMENT, LESSON_MANAGMENT, ROLE_MANAGMENT, STUDENT_MANAGMENT } from 'shared';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,18 +17,25 @@ export class HeaderBarComponent {
         })
     }
 
-    hasAccountManagment(){
+    hasAccountsManagment(){
         if(!this.userSvc.isLoggedIn()){
             return ''
         }
         return checkPermissions(this.userSvc.getUser().role, ACCOUNT_MANAGMENT)
     }
 
-    hasGroupManagment(){
+    hasGroupsManagment(){
         if(!this.userSvc.isLoggedIn()){
             return ''
         }
         return checkPermissions(this.userSvc.getUser().role, GROUP_MANAGMENT)
+    }
+
+    hasRolesManagment(){
+        if(!this.userSvc.isLoggedIn()){
+            return ''
+        }
+        return checkPermissions(this.userSvc.getUser().role, ROLE_MANAGMENT)
     }
 
     hasLessonsManagment(){
@@ -38,7 +45,7 @@ export class HeaderBarComponent {
         return checkPermissions(this.userSvc.getUser().role, LESSON_MANAGMENT)
     }
 
-    hasStudentManagment(){
+    hasStudentsManagment(){
         if(!this.userSvc.isLoggedIn()){
             return ''
         }

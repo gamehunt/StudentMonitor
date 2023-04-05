@@ -29,6 +29,8 @@ import { BaseManagerComponent } from './components/admin/base-manager/base-manag
 import { AccountManagerComponent } from './components/admin/account-manager/account-manager.component';
 import { AddAccountDialogComponent } from './components/admin/account-manager/dialogs/add-account-dialog/add-account-dialog.component';
 import { ConfirmationDialogComponent } from './components/admin/confirmation-dialog/confirmation-dialog.component';
+import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
+import { AddRoleDialogComponent } from './components/admin/role-manager/dialogs/add-role-dialog/add-role-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { ConfirmationDialogComponent } from './components/admin/confirmation-dia
     BaseManagerComponent,
     AccountManagerComponent,
     AddAccountDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    RoleManagerComponent,
+    AddRoleDialogComponent,
   ],
   imports: [
     BrowserModule,

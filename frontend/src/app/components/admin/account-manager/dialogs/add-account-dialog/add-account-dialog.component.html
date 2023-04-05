@@ -3,20 +3,21 @@
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
         <input matInput [(ngModel)]="data.username">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
+    </mat-form-field >
+    <mat-form-field appearance="fill" *ngIf="data.adding">
         <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="data.password">
-    </mat-form-field>
+            <input matInput [(ngModel)]="data.password">
+        </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>FIO</mat-label>
         <input matInput [(ngModel)]="data.fio">
     </mat-form-field>
+    
     <mat-form-field appearance="fill">
         <mat-label>Role</mat-label>
         <mat-select [(ngModel)]="data.role">
-            <mat-option *ngFor="let a of [1, 2, 3, 4, 5]" [value]="a">
-                {{a}}
+            <mat-option *ngFor="let role of roles" [value]="role.id">
+                {{role.name}}
             </mat-option>
         </mat-select>
     </mat-form-field>

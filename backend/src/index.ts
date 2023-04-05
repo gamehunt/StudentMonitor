@@ -17,6 +17,7 @@ import { Role } from "./entity/Role";
 import { ACCOUNT_MANAGMENT, ADMIN, checkPermissions } from 'shared'
 import cookieParser from "cookie-parser";
 import { USERS_ROUTER } from "./routers/UsersRouter";
+import { ROLES_ROUTER } from "./routers/RolesRouter";
 
 dotenv.config();
 
@@ -122,6 +123,7 @@ AppDataSource.initialize().then(async () => {
     });
 
     root_router.use('/users', USERS_ROUTER)
+    root_router.use('/roles', ROLES_ROUTER)
 
     root_router.get("/lessons", async (req, res) => {
         let lessons = await LESSON_PROVIDER.getLessonsForWeek(

@@ -1,44 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
-export class Column {
-    id!: string
-    name!: string
-}
-export type Columns = Column[];
-export class Layout {
-    columns!: Columns;
-}
-
 @Component({
+  selector: 'base-manager',
   templateUrl: './base-manager.component.html',
   styleUrls: ['./base-manager.component.scss']
 })
 export class BaseManagerComponent {
-    data: any[][] = []
+
+    @Output() onRefresh = new EventEmitter<void>();
+    @Output() onAdd     = new EventEmitter<void>();
+    @Output() onDelete  = new EventEmitter<any>();
 
     constructor(public dialog: MatDialog) {}
 
-    getLayout(): Layout | null { return null; }
-    fetchData(): void { this.data = [] }
-
-    getColumns() : Columns {
-        return this.getLayout()?.columns ?? []
-    }
-
-    getColumnIds() : string[] {
-        let columns = this.getColumns().map(c => c.id)
-        columns.push('actions')
-        return columns
-    }
-
     ngOnInit(){
-        this.refresh()
-    }
-
-    refresh(){
-        this.fetchData()
+        this._refresh()
     }
 
     _delete(data: any) {
@@ -52,7 +30,13 @@ export class BaseManagerComponent {
         })
     }
 
-    add() {}
-    edit(data: any) {}
     delete(data: any) {}
+
+    _add() {
+        this.onAdd.emit()
+    }
+
+    _refresh(){
+        this.onRefresh.emit()
+    }
 }

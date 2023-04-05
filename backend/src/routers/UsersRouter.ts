@@ -16,7 +16,10 @@ USERS_ROUTER.use((req, res, next) => {
 })
 
 USERS_ROUTER.get('/', async (req, res) => {
-        res.send({ok: true, data: await USER_PROVIDER.getUsers()});
+        res.send({ok: true, data: (await USER_PROVIDER.getUsers()).map(e => {
+            e.password = undefined;
+            return e;
+        })});
     })
 
 USERS_ROUTER.route('/:username')
@@ -37,11 +40,11 @@ USERS_ROUTER.route('/:username')
         res.send({ok: true});
     })
     .patch(async (req, res) => {
-        if(!req.body['username'] || !req.body['password'] || !req.body['fio'] || !req.body['role']){
+        if(!req.body['username'] || !req.body['fio'] || !req.body['role']){
             res.status(400).send({ok: false})
             return
         }
-        let result = await USER_PROVIDER.editUser(req.params['username'], req.body['username'], req.body['password'], req.body['fio'], req.body['role'])
+        let result = await USER_PROVIDER.editUser(req.params['username'], req.body['username'], req.body['password'] || undefined, req.body['fio'], req.body['role'])
         if(!result){
             res.status(400).send({ok: false});
         } else {

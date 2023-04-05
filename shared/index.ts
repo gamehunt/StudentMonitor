@@ -12,6 +12,7 @@ export const ACCOUNT_MANAGMENT = (1 << 4);
 export const ROLE_MANAGMENT    = (1 << 5);
 
 export class Role {
+    id!: number
     name!: string
     permissions!: number
 }
@@ -36,7 +37,6 @@ export function checkPermissions(roleOrPerms: Role | number, permissions: number
 export class User{
     id!: number
     username!: string
-    password!: string
     fio!: string
     role!: Role
 }
