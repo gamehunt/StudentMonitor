@@ -7,7 +7,6 @@ export class Response <T> {
 export const ADMIN             = (1 << 0);
 export const GROUP_MANAGMENT   = (1 << 1);
 export const LESSON_MANAGMENT  = (1 << 2);
-export const STUDENT_MANAGMENT = (1 << 3);
 export const ACCOUNT_MANAGMENT = (1 << 4);
 export const ROLE_MANAGMENT    = (1 << 5);
 

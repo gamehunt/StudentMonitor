@@ -1,0 +1,16 @@
+.mat-mdc-list {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.mat-mdc-list-item:hover {
+    background-color: rgb(223, 222, 222);
+    cursor: pointer
+}
+
+.actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}

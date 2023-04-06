@@ -8,7 +8,6 @@
         <button mat-menu-item routerLink="/managment/roles"     *ngIf="hasRolesManagment()">Управление ролями</button>
         <button mat-menu-item routerLink="/managment/groups"    *ngIf="hasGroupsManagment()">Управление группами</button>
         <button mat-menu-item routerLink="/managment/lessons"   *ngIf="hasLessonsManagment()">Управление расписанием</button>
-        <button mat-menu-item routerLink="/managment/students"  *ngIf="hasStudentsManagment()">Управление студентами</button>
         <button mat-menu-item (click)="logout()">Выйти</button>
     </mat-menu>
 </div>

@@ -20,6 +20,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
@@ -31,6 +32,8 @@ import { AddAccountDialogComponent } from './components/admin/account-manager/di
 import { ConfirmationDialogComponent } from './components/admin/confirmation-dialog/confirmation-dialog.component';
 import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
 import { AddRoleDialogComponent } from './components/admin/role-manager/dialogs/add-role-dialog/add-role-dialog.component';
+import { GroupManagerComponent } from './components/admin/group-manager/group-manager.component';
+import { AddStudentDialogComponent } from './components/admin/group-manager/dialogs/add-student-dialog/add-student-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { AddRoleDialogComponent } from './components/admin/role-manager/dialogs/
     ConfirmationDialogComponent,
     RoleManagerComponent,
     AddRoleDialogComponent,
+    GroupManagerComponent,
+    AddStudentDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,7 @@ import { AddRoleDialogComponent } from './components/admin/role-manager/dialogs/
     MatDividerModule,
     MatTableModule,
     MatSelectModule,
+    MatExpansionModule,
     FormsModule
   ],
   providers: [

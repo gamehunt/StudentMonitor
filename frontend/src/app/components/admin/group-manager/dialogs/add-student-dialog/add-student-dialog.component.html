@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Add Student</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Apply</button>
+    <button mat-button mat-dialog-close>Cancel</button> 
+</div>
