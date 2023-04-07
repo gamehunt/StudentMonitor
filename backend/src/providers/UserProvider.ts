@@ -46,7 +46,7 @@ export class UserProvider {
     }
 
     public async getUsers() : Promise<User[]> {
-        return AppDataSource.getRepository(User).find({relations: {role: true}})
+        return AppDataSource.getRepository(User).find({relations: {role: true, group: true}})
     }
 
     public async Login(username: string, password: string): Promise<User>{

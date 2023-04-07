@@ -1,10 +1,8 @@
-<h1 mat-dialog-title>Add Student</h1>
+<h1 mat-dialog-title>Add Group</h1>
 <div mat-dialog-content>
     <mat-form-field appearance="fill">
-        <mat-label>Select</mat-label>
-        <mat-select [(ngModel)]="data">
-            <mat-option [value]="student" *ngFor="let student of students">{{student.fio}}</mat-option>
-        </mat-select>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

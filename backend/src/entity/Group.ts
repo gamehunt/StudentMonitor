@@ -13,6 +13,6 @@ export class Group {
     @OneToMany(type => LessonOrder, lo => lo.group)
     lessons: LessonOrder[]
 
-    @OneToMany(type => User, user => user.lessons)
+    @OneToMany(type => User, user => user.group)
     students: User[]
 }

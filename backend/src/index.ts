@@ -18,6 +18,7 @@ import { ACCOUNT_MANAGMENT, ADMIN, checkPermissions } from 'shared'
 import cookieParser from "cookie-parser";
 import { USERS_ROUTER } from "./routers/UsersRouter";
 import { ROLES_ROUTER } from "./routers/RolesRouter";
+import { GROUPS_ROUTER } from "./routers/GroupsRouter";
 
 dotenv.config();
 
@@ -122,8 +123,9 @@ AppDataSource.initialize().then(async () => {
         res.send(Date.now().toString());
     });
 
-    root_router.use('/users', USERS_ROUTER)
-    root_router.use('/roles', ROLES_ROUTER)
+    root_router.use('/users',  USERS_ROUTER)
+    root_router.use('/roles',  ROLES_ROUTER)
+    root_router.use('/groups', GROUPS_ROUTER)
 
     root_router.get("/lessons", async (req, res) => {
         let lessons = await LESSON_PROVIDER.getLessonsForWeek(
@@ -131,10 +133,6 @@ AppDataSource.initialize().then(async () => {
             Boolean(req.query.is_even)
         );
         res.send(lessons);
-    });
-
-    root_router.get("/students", async (req, res) => {
-        res.send("TEST");
     });
 
     app.listen(port, () => {

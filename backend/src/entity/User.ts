@@ -21,7 +21,7 @@ export class User {
     @Column()
     password: string
 
-    @ManyToOne(type => Group, group => group.students)
+    @ManyToOne(type => Group, group => group.students , { onDelete: 'SET NULL' })
     group: Group
 
     @OneToMany(type => LessonOrder, lesson => lesson.teacher)

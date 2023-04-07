@@ -24,4 +24,8 @@ export class AccountsService {
     editAccount(data: User) {
         return this.http.patch<Response<any>>(`/api/users/${data.username}`, data, { withCredentials: true })
     }
+
+    getStudentAccounts() {
+        return this.http.get<Response<User[]>>('/api/users/students', {withCredentials: true})
+    }
 }

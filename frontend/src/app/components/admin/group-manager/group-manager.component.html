@@ -1,17 +1,18 @@
-<base-manager>
+<base-manager (onAdd)="addGroup()" (onRefresh)="refresh()">
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let group of [{students: [{name: 'Демаков Матвей Александрович'}]}]">
+        <mat-expansion-panel *ngFor="let group of groups">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                21-ПМ-2
+                {{ group.name }}
                 </mat-panel-title>
                 <mat-panel-description>
-                Всего студентов: 28
+                    <span>Всего студентов: {{group.students.length}}</span>
+                    <button mat-raised-button color="warn" (click)="deleteGroup($event, group.id)">Удалить</button>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <div class = "group-students">
                 <mat-toolbar>
-                    <button mat-raised-button color="primary" (click)="addStudentToGroup(1)">Добавить</button>
+                    <button mat-raised-button color="primary" (click)="addStudentToGroup(group.id)">Добавить</button>
                 </mat-toolbar>
                 <table mat-table [dataSource]="group.students">
                     <ng-container matColumnDef="index">
@@ -20,14 +21,14 @@
                     </ng-container>
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef>Ф.И.О</th>
-                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.fio}} </td>
                     </ng-container>
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef>Действия</th>
                         <td mat-cell *matCellDef="let element">
                             <div class = "actions-wrapper">
                                 <button mat-raised-button color="primary" routerLink="/journal/students/1">Успеваемость</button>
-                                <button mat-raised-button color="warn">Удалить</button>
+                                <button mat-raised-button color="warn" (click)="deleteStudentFromGroup(group.id, element.id)">Удалить</button>
                             </div>
                         </td>
                     </ng-container>

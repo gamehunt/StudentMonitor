@@ -34,6 +34,7 @@ import { RoleManagerComponent } from './components/admin/role-manager/role-manag
 import { AddRoleDialogComponent } from './components/admin/role-manager/dialogs/add-role-dialog/add-role-dialog.component';
 import { GroupManagerComponent } from './components/admin/group-manager/group-manager.component';
 import { AddStudentDialogComponent } from './components/admin/group-manager/dialogs/add-student-dialog/add-student-dialog.component';
+import { AddGroupDialogComponent } from './components/admin/group-manager/dialogs/add-group-dialog/add-group-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AddStudentDialogComponent } from './components/admin/group-manager/dial
     AddRoleDialogComponent,
     GroupManagerComponent,
     AddStudentDialogComponent,
+    AddGroupDialogComponent,
   ],
   imports: [
     BrowserModule,
