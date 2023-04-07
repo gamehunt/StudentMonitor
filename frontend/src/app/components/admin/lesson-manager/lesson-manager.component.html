@@ -1,0 +1,36 @@
+<base-manager>
+    <div toolbar>
+        <button mat-raised-button color="primary">Редактор расписания</button>
+    </div>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef>№</th>
+            <td mat-cell *matCellDef="let element"> 
+                {{ 1 }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Название</th>
+            <td mat-cell *matCellDef="let element"> 
+                {{ element.name }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="teacher">
+            <th mat-header-cell *matHeaderCellDef>Преподаватель</th>
+            <td mat-cell *matCellDef="let element"> 
+                {{ element.teacher.fio }}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Действия</th>
+            <td mat-cell *matCellDef="let element">
+                <div class = "actions-wrapper">
+                    <button mat-raised-button color="primary" (click)="edit(element)">Редактировать</button>
+                    <button mat-raised-button color="warn" (click)="_delete(element)">Удалить</button>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let rowData; columns: columns"></tr>
+    </table>
+</base-manager>
