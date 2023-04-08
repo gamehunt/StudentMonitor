@@ -1,6 +1,8 @@
-import { AppDataSource } from "../data-source"
-import { LessonOrder } from "../entity/LessonOrder"
-import { User } from "../entity/User"
+import { AppDataSource } from "../../data-source"
+import { Lesson } from "../../entity/Lesson"
+import { LessonOrder } from "../../entity/LessonOrder"
+import { User } from "../../entity/User"
+
 
 export class LessonProvider {
 
@@ -33,6 +35,24 @@ export class LessonProvider {
         .sort((a, b) => b.order - a.order)
     }
 
+    public async getLessons() : Promise<Lesson[]> {
+        return AppDataSource.getRepository(Lesson).find()
+    }
+
+    public async deleteLesson(id: number) {
+        await AppDataSource.getRepository(Lesson).delete({id: id})
+    }
+
+    public async createLesson(name: string) {
+        let lesson: Lesson = new Lesson()
+        lesson.name = name
+        await AppDataSource.getRepository(Lesson).save(lesson)
+    }
+
+    public async editLesson(id: number, name: string) {
+        let lesson: Lesson = await AppDataSource.getRepository(Lesson).findOneBy({id: id})
+        lesson.name = name
+        await AppDataSource.getRepository(Lesson).save(lesson)
+    }
 }
 
-export const LESSON_PROVIDER: LessonProvider = new LessonProvider()

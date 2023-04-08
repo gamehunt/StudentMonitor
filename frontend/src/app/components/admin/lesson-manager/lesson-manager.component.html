@@ -1,6 +1,6 @@
-<base-manager>
+<base-manager (onRefresh)="refresh()" (onAdd)="add()">
     <div toolbar>
-        <button mat-raised-button color="primary">Редактор расписания</button>
+        <button mat-raised-button color="primary" routerLink="/managment/lessons/schedule-editor">Редактор расписания</button>
     </div>
     <table mat-table [dataSource]="data" class="mat-elevation-z8">
         <ng-container matColumnDef="index">
@@ -13,12 +13,6 @@
             <th mat-header-cell *matHeaderCellDef>Название</th>
             <td mat-cell *matCellDef="let element"> 
                 {{ element.name }}
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="teacher">
-            <th mat-header-cell *matHeaderCellDef>Преподаватель</th>
-            <td mat-cell *matCellDef="let element"> 
-                {{ element.teacher.fio }}
             </td>
         </ng-container>
         <ng-container matColumnDef="actions">

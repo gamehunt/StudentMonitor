@@ -32,6 +32,11 @@ export class Group {
     students!: User[]
 }
 
+export class Lesson {
+    id!: number
+    name!: string
+}
+
 export function isAdmin(roleOrPerms: Role | number) : boolean {
     if(typeof roleOrPerms === 'number'){
         return (roleOrPerms & ADMIN) != 0;

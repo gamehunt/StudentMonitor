@@ -1,6 +1,6 @@
-import { AppDataSource } from "../data-source";
-import { Group } from "../entity/Group";
-import { User } from "../entity/User";
+import { AppDataSource } from "../../data-source";
+import { Group } from "../../entity/Group";
+import { User } from "../../entity/User";
 
 export class GroupProvider {
     async getGroups() : Promise<Group[]> {
@@ -43,4 +43,3 @@ export class GroupProvider {
     }
 }
 
-export const GROUP_PROVIDER: GroupProvider = new GroupProvider()

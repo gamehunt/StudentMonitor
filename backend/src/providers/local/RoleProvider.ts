@@ -1,6 +1,6 @@
-import { AppDataSource } from "../data-source"
-import { Role } from "../entity/Role"
-import { User } from "../entity/User"
+import { AppDataSource } from "../../data-source"
+import { Role } from "../../entity/Role"
+
 
 export class RoleProvider {
     public async getRoles() : Promise<Role[]> {
@@ -33,4 +33,3 @@ export class RoleProvider {
     }
 }
 
-export const ROLE_PROVIDER: RoleProvider = new RoleProvider()

@@ -1,8 +1,9 @@
-import { AppDataSource } from "../data-source"
-import { User } from "../entity/User"
+import { AppDataSource } from "../../data-source";
+import { Role } from "../../entity/Role";
+import { User } from "../../entity/User";
+import { USER_PROVIDER } from "../config";
 
-import bcrypt from 'bcrypt';
-import { Role } from "../entity/Role";
+import bcrypt from 'bcrypt'
 
 export class UserProvider {
 
@@ -62,4 +63,3 @@ export class UserProvider {
     }
 }
 
-export const USER_PROVIDER: UserProvider = new UserProvider()

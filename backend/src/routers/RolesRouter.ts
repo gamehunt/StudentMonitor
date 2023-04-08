@@ -1,12 +1,11 @@
 import express from "express";
 import { checkPermissions, ROLE_MANAGMENT } from "shared";
 import { User } from "../entity/User";
-import { ROLE_PROVIDER } from "../providers/RoleProvider";
-import { USERS_ROUTER } from "./UsersRouter";
+import { ROLE_PROVIDER } from "../providers/config";
 
 export const ROLES_ROUTER = express.Router()
 
-USERS_ROUTER.use((req, res, next) => {
+ROLES_ROUTER.use((req, res, next) => {
     let user: User = req.user as User
     if(!user || !checkPermissions(user.role.permissions, ROLE_MANAGMENT)){
         res.sendStatus(403)

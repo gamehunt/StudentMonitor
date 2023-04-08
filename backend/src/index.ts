@@ -5,8 +5,6 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { LESSON_PROVIDER } from "./providers/LessonProvider";
-import { USER_PROVIDER } from "./providers/UserProvider";
 import { Session } from "./entity/Session";
 import { TypeormStore } from "connect-typeorm/out";
 import bodyParser from "body-parser";
@@ -14,11 +12,13 @@ import { User } from "./entity/User";
 import bcrypt from 'bcrypt';
 import { Role } from "./entity/Role";
 
-import { ACCOUNT_MANAGMENT, ADMIN, checkPermissions } from 'shared'
+import { ADMIN } from 'shared'
 import cookieParser from "cookie-parser";
 import { USERS_ROUTER } from "./routers/UsersRouter";
 import { ROLES_ROUTER } from "./routers/RolesRouter";
 import { GROUPS_ROUTER } from "./routers/GroupsRouter";
+import { USER_PROVIDER, LESSON_PROVIDER } from "./providers/config";
+import { LESSONS_ROUTER } from "./routers/LessonsRouter";
 
 dotenv.config();
 
@@ -123,17 +123,10 @@ AppDataSource.initialize().then(async () => {
         res.send(Date.now().toString());
     });
 
-    root_router.use('/users',  USERS_ROUTER)
-    root_router.use('/roles',  ROLES_ROUTER)
-    root_router.use('/groups', GROUPS_ROUTER)
-
-    root_router.get("/lessons", async (req, res) => {
-        let lessons = await LESSON_PROVIDER.getLessonsForWeek(
-            undefined,
-            Boolean(req.query.is_even)
-        );
-        res.send(lessons);
-    });
+    root_router.use('/users',   USERS_ROUTER)
+    root_router.use('/roles',   ROLES_ROUTER)
+    root_router.use('/groups',  GROUPS_ROUTER)
+    root_router.use('/lessons', LESSONS_ROUTER)
 
     app.listen(port, () => {
         console.log(`Listening on port ${port}`);

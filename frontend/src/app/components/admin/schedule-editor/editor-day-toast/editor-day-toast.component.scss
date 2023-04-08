@@ -1,0 +1,45 @@
+.editor-day-card {
+    min-width: 350px;
+    background-color: #008ae6;
+    border-radius: 16px;
+}
+
+mat-card-header {
+    background-color: #00548b;
+    border-radius: 16px 16px 0 0;
+    justify-content: center;
+    padding: 8px 0px 8px 0px;
+}
+
+mat-card-title {
+    color: white;
+    font-size: 14pt;
+}
+
+mat-card-actions {
+    gap: 5px;
+}
+
+mat-card-actions {
+    justify-content: center;
+}
+
+.add-button {
+    font-size: 14pt;
+}
+
+.lesson-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.lesson-actions-wrapper {
+    border-left: solid black 1px;
+    padding-left: 5px;
+    margin-left: 5px;
+    display: flex;
+    gap: 5px;
+}

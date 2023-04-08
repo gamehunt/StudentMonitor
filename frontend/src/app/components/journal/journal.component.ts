@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Lesson, LessonsService, LessonQueryResult } from 'src/app/services/lessons.service';
+import { LessonsService } from 'src/app/services/lessons.service';
 import { interval, Subscription } from 'rxjs';
 import { TimeService } from 'src/app/services/time.service';
+import { Lesson } from 'shared';
 
 @Component({
   templateUrl: './journal.component.html',
@@ -14,7 +15,7 @@ export class JournalComponent {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
 
-  lessons: LessonQueryResult[] = []
+  lessons: Lesson[][] = []
 
   monday: Date = new Date()
 
@@ -29,8 +30,10 @@ export class JournalComponent {
         this.smallScreen = result.matches;
     });
     this.monday = this.getMonday(this.currentDate)
-    this.lessonsService.getLessons(false).subscribe((r: LessonQueryResult[]) => {
-        this.lessons = r;
+    this.lessonsService.getLessonsForWeek(false).subscribe((r) => {
+        if(r.ok){
+            this.lessons = r.data!;
+        }
     })
     this.updateSubscribtion = interval(30 * 1000).subscribe(_ => this.updateTime());
     this.updateTime()

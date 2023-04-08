@@ -1,7 +1,7 @@
 import express from "express";
 import { checkPermissions, GROUP_MANAGMENT } from "shared";
 import { User } from "../entity/User";
-import { GROUP_PROVIDER } from "../providers/GroupProvider";
+import { GROUP_PROVIDER } from "../providers/config";
 
 export const GROUPS_ROUTER = express.Router()
 

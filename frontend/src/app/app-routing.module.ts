@@ -4,6 +4,7 @@ import { AccountManagerComponent } from './components/admin/account-manager/acco
 import { GroupManagerComponent } from './components/admin/group-manager/group-manager.component';
 import { LessonManagerComponent } from './components/admin/lesson-manager/lesson-manager.component';
 import { RoleManagerComponent } from './components/admin/role-manager/role-manager.component';
+import { ScheduleEditorComponent } from './components/admin/schedule-editor/schedule-editor.component';
 import { JournalComponent } from './components/journal/journal.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'managment/roles',    component: RoleManagerComponent },
   { path: 'managment/groups',   component: GroupManagerComponent },
   { path: 'managment/lessons',  component: LessonManagerComponent },
+  { path: 'managment/lessons/schedule-editor', component: ScheduleEditorComponent }
 ];
 
 @NgModule({

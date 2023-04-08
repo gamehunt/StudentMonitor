@@ -1,8 +1,7 @@
 import express from "express";
-import { checkPermissions, ACCOUNT_MANAGMENT, STUDENT, isStudent } from "shared";
-import { AppDataSource } from "../data-source";
+import { checkPermissions, ACCOUNT_MANAGMENT, isStudent } from "shared";
 import { User } from "../entity/User";
-import { USER_PROVIDER } from "../providers/UserProvider";
+import { USER_PROVIDER } from "../providers/config";
 
 export const USERS_ROUTER = express.Router()
 

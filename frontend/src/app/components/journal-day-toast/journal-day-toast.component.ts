@@ -1,7 +1,7 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Inject, Input, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { LessonQueryResult, Lesson, LessonsService } from 'src/app/services/lessons.service';
+import { Lesson } from 'shared';
+import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
   selector: 'app-journal-day-toast',
@@ -18,7 +18,7 @@ export class JournalDayToastComponent {
     isActive: boolean = false
 
     @Input()
-    lessons: LessonQueryResult = []
+    lessons: Lesson[] = []
 
     getDate()
     {
