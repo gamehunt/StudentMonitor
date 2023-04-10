@@ -1,5 +1,5 @@
 import express from "express";
-import { checkPermissions, ACCOUNT_MANAGMENT, isStudent } from "shared";
+import { checkPermissions, ACCOUNT_MANAGMENT, isStudent, isTeacher } from "shared";
 import { User } from "../entity/User";
 import { USER_PROVIDER } from "../providers/config";
 
@@ -26,6 +26,13 @@ USERS_ROUTER.get('/students', async (req, res) => {
         e.password = undefined;
         return e;
     }).filter(e => isStudent(e.role))});
+})
+
+USERS_ROUTER.get('/teachers', async (req, res) => {
+    res.send({ok: true, data: (await USER_PROVIDER.getUsers()).map(e => {
+        e.password = undefined;
+        return e;
+    }).filter(e => isTeacher(e.role))});
 })
 
 USERS_ROUTER.route('/:username')

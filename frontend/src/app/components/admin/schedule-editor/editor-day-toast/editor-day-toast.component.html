@@ -1,26 +1,26 @@
 <mat-card class="editor-day-card">
     <mat-card-header>
-      <mat-card-title>Понедельник</mat-card-title>
+        <mat-card-title>{{getDayName()}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-list role="list">
-            <ng-container *ngFor="let a of [1, 2, 3, 4, 5, 6]; let i = index;">
-                <mat-list-item role="listitem">
-                    <div class="lesson-wrapper">
-                        <span>{{i + 1}}. Maт. анализ</span>
-                        <span>Кривоносов Л.А</span>
-                        <div class="lesson-actions-wrapper">
-                            <button mat-raised-button color="accent">Edit</button>
-                            <button mat-raised-button color="warn">Delete</button>
-                        </div>
+        <div class="lesson-list" cdkDropList [cdkDropListData]="lessons" (cdkDropListDropped)="rearrangeLessons($event)">
+            <div class="lesson" *ngFor="let lesson of lessons; let i = index;" cdkDrag>
+                <div class="lesson-content">
+                    <div *ngIf="lesson; else emptyLesson">
+                        <span>{{i + 1}}. {{lesson.lesson.name}}</span>
+                        <span>{{lesson.teacher.fio}}</span>
                     </div>
-                </mat-list-item>
+                    <ng-template #emptyLesson>{{i + 1}}. &mdash;</ng-template>
+                    <div class="lesson-actions-wrapper">
+                        <button mat-raised-button color="accent">Edit</button>
+                        <button mat-raised-button color="warn" (click)="delete(lesson)">Delete</button>
+                    </div>
+                </div>
                 <mat-divider></mat-divider>
-            </ng-container>
-          </mat-list>
+            </div>
+        </div >
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button class="add-button" color="accent">Add</button>
-      <button mat-raised-button class="add-button" color="accent">Add Empty</button>
+        <button mat-raised-button class="add-button" color="accent" (click)="addLesson()">Add</button>
     </mat-card-actions>
-  </mat-card>
+</mat-card>

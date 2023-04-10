@@ -37,6 +37,16 @@ export class Lesson {
     name!: string
 }
 
+export class LessonOrder {
+    id!: number
+    day!: number
+    order!: number
+    lesson!: Lesson
+    teacher!: User
+    group!: Group
+    is_even!: boolean
+}
+
 export function isAdmin(roleOrPerms: Role | number) : boolean {
     if(typeof roleOrPerms === 'number'){
         return (roleOrPerms & ADMIN) != 0;
@@ -55,7 +65,7 @@ export function isTeacher(roleOrPerms : Role | number) : boolean {
     if(typeof roleOrPerms === 'number'){
         return (roleOrPerms & TEACHER) != 0;
     }
-    return isStudent(roleOrPerms.permissions)
+    return isTeacher(roleOrPerms.permissions)
 }
 
 export function checkPermissions(roleOrPerms: Role | number, permissions: number): boolean {

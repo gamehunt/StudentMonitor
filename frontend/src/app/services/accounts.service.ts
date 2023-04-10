@@ -28,4 +28,8 @@ export class AccountsService {
     getStudentAccounts() {
         return this.http.get<Response<User[]>>('/api/users/students', {withCredentials: true})
     }
+
+    getTeacherAccounts() {
+        return this.http.get<Response<User[]>>('/api/users/teachers', {withCredentials: true})
+    }
 }

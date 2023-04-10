@@ -3,7 +3,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { interval, Subscription } from 'rxjs';
 import { TimeService } from 'src/app/services/time.service';
-import { Lesson } from 'shared';
+import { Group, Lesson } from 'shared';
 
 @Component({
   templateUrl: './journal.component.html',
@@ -30,9 +30,9 @@ export class JournalComponent {
         this.smallScreen = result.matches;
     });
     this.monday = this.getMonday(this.currentDate)
-    this.lessonsService.getLessonsForWeek(false).subscribe((r) => {
+    this.lessonsService.getLessonsForWeek(false, new Group()).subscribe((r) => {
         if(r.ok){
-            this.lessons = r.data!;
+            this.lessons = [r.data!.map(e => e.lesson)];
         }
     })
     this.updateSubscribtion = interval(30 * 1000).subscribe(_ => this.updateTime());

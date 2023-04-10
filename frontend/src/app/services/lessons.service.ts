@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Lesson, Response } from 'shared';
+import { Group, Lesson, LessonOrder, Response } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +9,12 @@ import { Lesson, Response } from 'shared';
 export class LessonsService {
   constructor(private http: HttpClient) { }
 
-  getLessonsForDay(day: number, is_even: boolean): Observable<Response<Lesson[]>>{
-    return this.http.get<Response<Lesson[]>>(`/api/lessons?day=${day}&is_even=${is_even}`)
+  getLessonsForDay(day: number, is_even: boolean, group: Group): Observable<Response<LessonOrder[]>>{
+    return this.http.get<Response<LessonOrder[]>>(`/api/lessons?day=${day}&is_even=${is_even}&group=${group.id}`)
   }
 
-  getLessonsForWeek(is_even: boolean): Observable<Response<Lesson[][]>> {
-    return this.http.get<Response<Lesson[][]>>(`/api/lessons?is_even=${is_even}`)
+  getLessonsForWeek(is_even: boolean, group: Group): Observable<Response<LessonOrder[]>> {
+    return this.http.get<Response<LessonOrder[]>>(`/api/lessons?is_even=${is_even}&group=${group.id}`)
   }
 
   getLessons(): Observable<Response<Lesson[]>>{
@@ -31,5 +31,17 @@ export class LessonsService {
 
   deleteLesson(id: number) {
     return this.http.delete<Response<void>>(`/api/lessons/${id}`);
+  }
+
+  addLessonToDay(lesson: LessonOrder) {
+    return this.http.post<Response<void>>('/api/lessons/schedule', lesson);
+  }
+
+  deleteLessonFromDay(lesson: LessonOrder) {
+    return this.http.delete<Response<void>>(`/api/lessons/schedule/${lesson.id}`)
+  }
+
+  editLessonFromDay(lesson: LessonOrder) {
+    return this.http.patch<Response<void>>(`/api/lessons/schedule/${lesson.id}`, lesson)
   }
 }

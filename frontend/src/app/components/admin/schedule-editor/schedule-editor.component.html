@@ -1,18 +1,22 @@
 <mat-toolbar>
     <mat-form-field appearance="fill">
         <mat-label>Группа</mat-label>
-        <mat-select [(ngModel)]="currentGroup">
+        <mat-select [(ngModel)]="currentGroup" (ngModelChange)="refresh()">
             <mat-option *ngFor="let group of groups" [value]="group">
                 {{ group.name }}
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-checkbox>Четная неделя</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isEven" (ngModelChange)="refresh()">Четная неделя</mat-checkbox>
 </mat-toolbar>
-<div class="editor-wrapper">
+<div class="editor-wrapper" *ngIf="currentGroup" cdkDropListGroup>
     <mat-grid-list [cols]="getColumnAmount()" gutterSize="10px" rowHeight="400px" class="editor-wrapper">
-        <mat-grid-tile *ngFor="let day of [1, 2, 3, 4, 5, 6]">
-            <editor-day-toast></editor-day-toast>
+        <mat-grid-tile *ngFor="let day of [0, 1, 2, 3, 4, 5]">
+            <editor-day-toast 
+            (onLessonAdd)="addLessonToDay($event)" 
+            (onLessonDelete)="deleteLessonFromDay($event)" 
+            (onLessonEdit)="editLessonFromDay($event)" 
+            [day]="day" [lessons]="getLessonsForDay(day)"></editor-day-toast>
         </mat-grid-tile>
     </mat-grid-list>
 </div>

@@ -7,6 +7,10 @@ export class GroupProvider {
         return AppDataSource.getRepository(Group).find({relations: {students: true}})
     }
 
+    async getGroupById(id: number) : Promise<Group> {
+        return AppDataSource.getRepository(Group).findOneBy({id: id})
+    }
+
     async addGroup(name: string) {
         let gr : Group = new Group()
         gr.name = name;

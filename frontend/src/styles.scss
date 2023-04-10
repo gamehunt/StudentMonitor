@@ -42,3 +42,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .modal-backdrop {
     backdrop-filter: blur(16px);
 }
+
+[mat-dialog-content] {
+    display: flex !important;
+    flex-direction: column;
+    min-width: 23vw;
+}
+
+[mat-dialog-actions] {
+    justify-content: right;
+}

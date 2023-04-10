@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
@@ -40,6 +41,7 @@ import { LessonManagerComponent } from './components/admin/lesson-manager/lesson
 import { AddLessonDialogComponent } from './components/admin/lesson-manager/dialogs/add-lesson-dialog/add-lesson-dialog.component';
 import { ScheduleEditorComponent } from './components/admin/schedule-editor/schedule-editor.component';
 import { EditorDayToastComponent } from './components/admin/schedule-editor/editor-day-toast/editor-day-toast.component';
+import { AddLessonToDayDialogComponent } from './components/admin/schedule-editor/dialogs/add-lesson-to-day-dialog/add-lesson-to-day-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { EditorDayToastComponent } from './components/admin/schedule-editor/edit
     AddLessonDialogComponent,
     ScheduleEditorComponent,
     EditorDayToastComponent,
+    AddLessonToDayDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ import { EditorDayToastComponent } from './components/admin/schedule-editor/edit
     MatSelectModule,
     MatExpansionModule,
     MatCheckboxModule,
+    DragDropModule,
     FormsModule
   ],
   providers: [
