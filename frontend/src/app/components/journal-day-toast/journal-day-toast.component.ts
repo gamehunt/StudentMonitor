@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { Lesson } from 'shared';
+import { DayLessons, Lesson } from 'shared';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class JournalDayToastComponent {
     isActive: boolean = false
 
     @Input()
-    lessons: Lesson[] = []
+    lessons: DayLessons = []
 
     getDate()
     {

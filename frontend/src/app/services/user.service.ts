@@ -28,7 +28,7 @@ export class UserService {
     return this.http.post('/api/logout', {})
   }
 
-  getUser(){
+  getUser() : User{
     let user: string | null = window.sessionStorage.getItem('user')
     return user ? JSON.parse(user) : undefined
   }

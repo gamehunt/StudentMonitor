@@ -24,7 +24,6 @@ export class AppComponent {
 
   openLoginModal(): MatDialogRef<LoginModalComponent> {
     return this.dialog.open(LoginModalComponent, {
-      width: '340px',
       disableClose: true,
       ariaModal: true,
       backdropClass: "modal-backdrop",

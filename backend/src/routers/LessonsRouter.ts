@@ -1,4 +1,5 @@
 import express from "express";
+import { WeekLessons } from "shared";
 import { GROUP_PROVIDER, LESSON_PROVIDER, USER_PROVIDER } from "../providers/config";
 import { toBoolean } from "../utils";
 
@@ -11,11 +12,29 @@ LESSONS_ROUTER.route('/')
             res.sendStatus(400)
             return
         }
-        let group = await GROUP_PROVIDER.getGroupById(parseInt(req.query['group'] as string))
+        let groupId = parseInt(req.query['group'] as string)
+
+        if(isNaN(groupId)){
+            res.sendStatus(400)
+            return
+        }
+
+        let group   = await GROUP_PROVIDER.getGroupById(groupId)
+        let isEven  = toBoolean(req.query['is_even'] as string)
         if(!req.query['day']) {
-            res.send({ok: true, data: await LESSON_PROVIDER.getLessonsForWeek(group, toBoolean(req.query['is_even'] as string))})
+            let lessons = await LESSON_PROVIDER.getLessonsForWeek(group, isEven)
+            let result: WeekLessons = []
+            for(let i = 0; i <= 5; i++) {
+                result.push(lessons.filter(e => e.day == i))
+                if(result[i].length > 0) {
+                    // Fills order gaps with nulls, so we have empty lessons. For example [1, 3, 5] => [1, null, 3, null, 5]
+                    result[i] = Array.from(Array(Math.max(...result[i].map(e => e.order)) + 1).keys()).map(idx => result[i].find(e => e.order == idx) || null)
+                }
+            }
+            res.send({ok: true, data: result})
         }else {
-            res.send({ok: true, data: await LESSON_PROVIDER.getLessonsForDay(parseInt(req.query['day'] as string), toBoolean(req.query['is_even'] as string), group)})
+            let day     = parseInt(req.query['day'] as string)
+            res.send({ok: true, data: await LESSON_PROVIDER.getLessonsForDay(day, isEven, group)})
         }
     }else{
         res.send({ok: true, data: await LESSON_PROVIDER.getLessons()})

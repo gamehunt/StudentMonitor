@@ -7,12 +7,11 @@
             <div class="lesson" *ngFor="let lesson of lessons; let i = index;" cdkDrag>
                 <div class="lesson-content">
                     <div *ngIf="lesson; else emptyLesson">
-                        <span>{{i + 1}}. {{lesson.lesson.name}}</span>
-                        <span>{{lesson.teacher.fio}}</span>
+                        <span>{{i + 1}}. {{lesson.lesson.name}}, {{getShortFio(lesson.teacher.fio)}}</span>
                     </div>
                     <ng-template #emptyLesson>{{i + 1}}. &mdash;</ng-template>
                     <div class="lesson-actions-wrapper">
-                        <button mat-raised-button color="accent">Edit</button>
+                        <button mat-raised-button color="accent" (click)="edit(lesson)">Edit</button>
                         <button mat-raised-button color="warn" (click)="delete(lesson)">Delete</button>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ import { User } from "./entity/User";
 import bcrypt from 'bcrypt';
 import { Role } from "./entity/Role";
 
-import { ADMIN } from 'shared'
+import { ADMIN, isStudent } from 'shared'
 import cookieParser from "cookie-parser";
 import { USERS_ROUTER } from "./routers/UsersRouter";
 import { ROLES_ROUTER } from "./routers/RolesRouter";
@@ -110,7 +110,7 @@ AppDataSource.initialize().then(async () => {
         })(req, res, next);
     }, (req, res) => {
         let user: User = req.user as User
-        res.send({ok: true, data: {fio: user.fio, role: user.role}})
+        res.send({ok: true, data: {fio: user.fio, role: user.role, group: user.group}})
     });
 
     root_router.post("/logout", async (req, res) => {

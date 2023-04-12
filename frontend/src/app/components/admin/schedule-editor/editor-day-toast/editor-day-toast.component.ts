@@ -29,9 +29,12 @@ export class EditorDayToastComponent {
 
   constructor(private dialog: MatDialog) {}
 
+  private emptyData = {teacher: {id: 0}, lesson: {id: 0}};
+
   addLesson() {
+    
     const dialogRef = this.dialog.open(AddLessonToDayDialogComponent, {
-      data: {},
+      data: Object.assign({}, this.emptyData),
     });
     dialogRef.afterClosed().subscribe((result: LessonOrder) => {
       if (result) {
@@ -52,33 +55,42 @@ export class EditorDayToastComponent {
   delete(data: LessonOrder | null) {
     if (data) {
       this.onLessonDelete.emit(data);
+      for(let i = data.order; i < this.lessons.length; i++) {
+        let lesson = this.lessons[i]
+        if(lesson) {
+            lesson.order--;
+            this.onLessonEdit.emit(lesson)
+        }
+      }
     }
+  }
+
+  edit(data: LessonOrder | null) {
+    const dialogRef = this.dialog.open(AddLessonToDayDialogComponent, {
+        data: Object.assign(this.emptyData , data || this.emptyData ),
+    });
+    dialogRef.afterClosed().subscribe((result: LessonOrder) => {
+        if (result) {
+          this.onLessonEdit.emit(result);
+        }
+    });
   }
 
   rearrangeLessons(event: CdkDragDrop<(LessonOrder | null)[]>) {
     let lessons = event.container.data
-    if(event.previousContainer != event.container) {
-        let otherLessons = event.previousContainer.data
-        transferArrayItem(otherLessons, lessons, event.previousIndex, event.currentIndex)
-        for(let i = 0; i < otherLessons.length; i++) {
-            let lesson = otherLessons[i]
-            if(lesson && lesson.order != i){
-                lesson.order = i;
-                this.onLessonEdit.emit(lesson)
-            }
+    moveItemInArray(lessons, event.previousIndex, event.currentIndex)
+    for(let i = 0; i < lessons.length; i++) {
+        let lesson = lessons[i]
+        if(lesson && lesson.order != i){
+            lesson.order = i;
+            lesson.day = this.day;
+            this.onLessonEdit.emit(lesson)
         }
-    }else{
-        moveItemInArray(lessons, event.previousIndex, event.currentIndex)
     }
-    setTimeout(() => {
-        for(let i = 0; i < lessons.length; i++) {
-            let lesson = lessons[i]
-            if(lesson && lesson.order != i){
-                lesson.order = i;
-                lesson.day = this.day;
-                this.onLessonEdit.emit(lesson)
-            }
-        }
-    }, 5)
+  }
+
+  getShortFio(fio: string) {
+    let words = fio.split(' ')
+    return words[0] + '.' + words[1].charAt(0).toUpperCase() + '.' + words[2].charAt(0).toUpperCase()
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Group, Lesson, LessonOrder, Response } from 'shared';
+import { Group, Lesson, LessonOrder, Response, WeekLessons } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class LessonsService {
     return this.http.get<Response<LessonOrder[]>>(`/api/lessons?day=${day}&is_even=${is_even}&group=${group.id}`)
   }
 
-  getLessonsForWeek(is_even: boolean, group: Group): Observable<Response<LessonOrder[]>> {
-    return this.http.get<Response<LessonOrder[]>>(`/api/lessons?is_even=${is_even}&group=${group.id}`)
+  getLessonsForWeek(is_even: boolean, group: Group): Observable<Response<WeekLessons>> {
+    return this.http.get<Response<WeekLessons>>(`/api/lessons?is_even=${is_even}&group=${group.id}`)
   }
 
   getLessons(): Observable<Response<Lesson[]>>{

@@ -47,6 +47,9 @@ export class LessonOrder {
     is_even!: boolean
 }
 
+export type DayLessons  = (LessonOrder | null) []
+export type WeekLessons = DayLessons []
+
 export function isAdmin(roleOrPerms: Role | number) : boolean {
     if(typeof roleOrPerms === 'number'){
         return (roleOrPerms & ADMIN) != 0;

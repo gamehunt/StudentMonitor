@@ -51,7 +51,7 @@ export class UserProvider {
     }
 
     public async Login(username: string, password: string): Promise<User>{
-        let user = await AppDataSource.getRepository(User).findOne({where: {username: username}, relations: {role: true}})
+        let user = await AppDataSource.getRepository(User).findOne({where: {username: username}, relations: {role: true, group: true}})
         if(!user){
             return undefined;
         }

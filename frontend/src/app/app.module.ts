@@ -24,7 +24,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { JournalComponent } from './components/journal/journal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JournalDayToastComponent } from './components/journal-day-toast/journal-day-toast.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,6 +42,8 @@ import { AddLessonDialogComponent } from './components/admin/lesson-manager/dial
 import { ScheduleEditorComponent } from './components/admin/schedule-editor/schedule-editor.component';
 import { EditorDayToastComponent } from './components/admin/schedule-editor/editor-day-toast/editor-day-toast.component';
 import { AddLessonToDayDialogComponent } from './components/admin/schedule-editor/dialogs/add-lesson-to-day-dialog/add-lesson-to-day-dialog.component';
+import { StudentJournalViewComponent } from './components/journal/views/student-journal-view/student-journal-view.component';
+import { TeacherJournalViewComponent } from './components/journal/views/teacher-journal-view/teacher-journal-view.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { AddLessonToDayDialogComponent } from './components/admin/schedule-edito
     ScheduleEditorComponent,
     EditorDayToastComponent,
     AddLessonToDayDialogComponent,
+    StudentJournalViewComponent,
+    TeacherJournalViewComponent,
   ],
   imports: [
     BrowserModule,
