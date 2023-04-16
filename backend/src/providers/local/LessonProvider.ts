@@ -84,5 +84,16 @@ export class LessonProvider {
     public async deleteLessonOrder(id: number) {
         await AppDataSource.getRepository(LessonOrder).delete({id: id})
     }
+
+    public async getLessonsForTeacher(teacher: User, is_even: boolean) {
+        return await AppDataSource.getRepository(LessonOrder).find({
+            where: {is_even: is_even, teacher: teacher}, 
+            relations: {
+                teacher: true,
+                group: true,
+                lesson: true,
+                entries: true
+        }})
+    }
 }
 

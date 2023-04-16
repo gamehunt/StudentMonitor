@@ -17,6 +17,7 @@
               mat-button
               color="primary"
               *ngIf="lesson != null; else empty"
+              (click)="handleLessonClick(lesson)"
             >
               {{ lesson.lesson.name }}
             </button>

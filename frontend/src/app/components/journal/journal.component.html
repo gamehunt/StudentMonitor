@@ -4,7 +4,7 @@
         <teacher-journal-view></teacher-journal-view>
     </ng-template>
     <ng-template ngSwitchCase="2">
-        <student-journal-view></student-journal-view>
+        <student-journal-view [isSmallScreen]="smallScreen"></student-journal-view>
     </ng-template>
     <ng-template ngSwitchDefault>Unknown view</ng-template>
 </div>`

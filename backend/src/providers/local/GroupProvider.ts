@@ -45,5 +45,9 @@ export class GroupProvider {
             }
         }
     }
+
+    async getStudents(group: number) {
+        return (await AppDataSource.getRepository(Group).findOne({where: {id: group}, relations: {students: true}})).students
+    }
 }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Group, Response } from 'shared';
+import { Group, Response, User } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,9 @@ export class GroupsService {
 
   deleteStudent(group: number, student: number) {
     return this.http.delete<Response<void>>(`/api/groups/${group}/students/${student}`)
+  }
+
+  getGroupStudents(group: Group) {
+    return this.http.get<Response<User[]>>(`/api/groups/${group.id}/students`)
   }
 }

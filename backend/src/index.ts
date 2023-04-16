@@ -110,7 +110,7 @@ AppDataSource.initialize().then(async () => {
         })(req, res, next);
     }, (req, res) => {
         let user: User = req.user as User
-        res.send({ok: true, data: {fio: user.fio, role: user.role, group: user.group}})
+        res.send({ok: true, data: {id: user.id, fio: user.fio, role: user.role, group: user.group}})
     });
 
     root_router.post("/logout", async (req, res) => {

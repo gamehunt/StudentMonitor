@@ -7,7 +7,7 @@ export const GROUPS_ROUTER = express.Router()
 
 GROUPS_ROUTER.use((req, res, next) => {
     let user: User = req.user as User
-    if(!user || !checkPermissions(user.role.permissions, GROUP_MANAGMENT)){
+    if(!user || (req.method != 'GET' && !checkPermissions(user.role.permissions, GROUP_MANAGMENT))){
         res.sendStatus(403)
         return
     }
@@ -38,6 +38,9 @@ GROUPS_ROUTER.route('/:id')
     })
 
 GROUPS_ROUTER.route('/:id/students')
+    .get(async (req, res) => {
+        res.send({ok: true, data: await GROUP_PROVIDER.getStudents(parseInt(req.params['id']))})
+    })
     .post(async (req, res) => {
         if(!req.body.id) {
             res.sendStatus(400)

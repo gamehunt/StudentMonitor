@@ -44,6 +44,7 @@ import { EditorDayToastComponent } from './components/admin/schedule-editor/edit
 import { AddLessonToDayDialogComponent } from './components/admin/schedule-editor/dialogs/add-lesson-to-day-dialog/add-lesson-to-day-dialog.component';
 import { StudentJournalViewComponent } from './components/journal/views/student-journal-view/student-journal-view.component';
 import { TeacherJournalViewComponent } from './components/journal/views/teacher-journal-view/teacher-journal-view.component';
+import { LessonMarksDialogComponent } from './components/journal/views/teacher-journal-view/dialogs/lesson-marks-dialog/lesson-marks-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { TeacherJournalViewComponent } from './components/journal/views/teacher-
     AddLessonToDayDialogComponent,
     StudentJournalViewComponent,
     TeacherJournalViewComponent,
+    LessonMarksDialogComponent,
   ],
   imports: [
     BrowserModule,

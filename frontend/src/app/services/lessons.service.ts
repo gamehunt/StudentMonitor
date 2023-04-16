@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Group, Lesson, LessonOrder, Response, WeekLessons } from 'shared';
+import { Group, Lesson, LessonOrder, Response, User, WeekLessons } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +43,9 @@ export class LessonsService {
 
   editLessonFromDay(lesson: LessonOrder) {
     return this.http.patch<Response<void>>(`/api/lessons/schedule/${lesson.id}`, lesson)
+  }
+
+  getLessonsForTeacher(teacher: User, is_even: boolean) : Observable<Response<WeekLessons>>{
+    return this.http.get<Response<WeekLessons>>(`/api/lessons/schedule/teacher/${teacher.id}`)
   }
 }
