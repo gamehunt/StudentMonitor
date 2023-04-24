@@ -3,6 +3,7 @@ import { Group } from "../../entity/Group"
 import { Lesson } from "../../entity/Lesson"
 import { LessonOrder } from "../../entity/LessonOrder"
 import { User } from "../../entity/User"
+import { removePassword } from "../../utils"
 
 
 export class LessonProvider {
@@ -81,19 +82,27 @@ export class LessonProvider {
         await AppDataSource.getRepository(LessonOrder).save(lessonOrder)
     }
 
+    public async getLessonOrderById(id: number): Promise<LessonOrder> {
+        return AppDataSource.getRepository(LessonOrder).findOneBy({id: id})
+    }
+
     public async deleteLessonOrder(id: number) {
         await AppDataSource.getRepository(LessonOrder).delete({id: id})
     }
 
     public async getLessonsForTeacher(teacher: User, is_even: boolean) {
-        return await AppDataSource.getRepository(LessonOrder).find({
-            where: {is_even: is_even, teacher: teacher}, 
+        return await (await AppDataSource.getRepository(LessonOrder).find({
+            where: { is_even: is_even, teacher: teacher },
             relations: {
                 teacher: true,
                 group: true,
                 lesson: true,
                 entries: true
-        }})
+            }
+        })).map(e => {
+            e.teacher = removePassword(e.teacher)
+            return e;
+        })
     }
 }
 

@@ -7,7 +7,7 @@ export class JournalEntry {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({type: 'date'})
+    @Column({type: 'timestamp'})
     date: Date
 
     @ManyToOne(type => LessonOrder, lo => lo.entries)
@@ -19,6 +19,6 @@ export class JournalEntry {
     @Column()
     was: boolean
 
-    @Column()
+    @Column({nullable: true})
     mark: number
 }

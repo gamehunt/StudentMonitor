@@ -39,7 +39,9 @@ export class UserProvider {
             return false
         }
         user.username = username
-        user.password = await bcrypt.hash(password, 4)
+        if(password) {
+            user.password = await bcrypt.hash(password, 4)
+        }
         user.fio      = fio
         user.role     = await AppDataSource.getRepository(Role).findOneBy({id: role})
         await AppDataSource.getRepository(User).save(user)

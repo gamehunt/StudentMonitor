@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Group } from "../../entity/Group";
 import { User } from "../../entity/User";
+import { removePassword } from "../../utils";
 
 export class GroupProvider {
     async getGroups() : Promise<Group[]> {
@@ -47,7 +48,7 @@ export class GroupProvider {
     }
 
     async getStudents(group: number) {
-        return (await AppDataSource.getRepository(Group).findOne({where: {id: group}, relations: {students: true}})).students
+        return (await AppDataSource.getRepository(Group).findOne({where: {id: group}, relations: {students: true}})).students.map(s => removePassword(s))
     }
 }
 

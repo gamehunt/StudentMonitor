@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { WeekLessons } from 'shared';
+import { WeekLessons, getMonday } from 'shared';
 import { LessonClickData } from 'src/app/components/journal-day-toast/journal-day-toast.component';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { UserService } from 'src/app/services/user.service';
 import { LessonMarksDialogComponent } from './dialogs/lesson-marks-dialog/lesson-marks-dialog.component';
+import { TotalMarksDialogComponent } from './dialogs/total-marks-dialog/total-marks-dialog.component';
 
 @Component({
   selector: 'teacher-journal-view',
@@ -29,14 +30,7 @@ export class TeacherJournalViewComponent {
     }
 
     ngOnChanges(){
-        this.monday = this.getMonday(this.currentDate)
-    }
-
-    getMonday(d: Date) {
-        d = new Date(d);
-        var day = d.getDay(),
-            diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-        return new Date(d.setDate(diff));
+        this.monday = getMonday(this.currentDate)
     }
     
     offsetInWeek(amount: number) : Date{
@@ -57,7 +51,7 @@ export class TeacherJournalViewComponent {
     }
 
     refresh(){
-        this.monday = this.getMonday(this.currentDate)
+        this.monday = getMonday(this.currentDate)
         if(this.userService.isLoggedIn()){
             this.lessonsService.getLessonsForTeacher(this.userService.getUser(), false).subscribe((r) => {
                 if(r.ok){
@@ -70,6 +64,12 @@ export class TeacherJournalViewComponent {
     handleLessonClick(data: LessonClickData){
         const dialogRef = this.dialog.open(LessonMarksDialogComponent, {
             data: data
+        })
+    }
+
+    openTotalMarks() {
+        const dialogRef = this.dialog.open(TotalMarksDialogComponent, {
+            
         })
         dialogRef.afterClosed().subscribe(data => {
 

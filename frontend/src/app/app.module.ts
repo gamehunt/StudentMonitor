@@ -45,6 +45,9 @@ import { AddLessonToDayDialogComponent } from './components/admin/schedule-edito
 import { StudentJournalViewComponent } from './components/journal/views/student-journal-view/student-journal-view.component';
 import { TeacherJournalViewComponent } from './components/journal/views/teacher-journal-view/teacher-journal-view.component';
 import { LessonMarksDialogComponent } from './components/journal/views/teacher-journal-view/dialogs/lesson-marks-dialog/lesson-marks-dialog.component';
+import { StudentDayToastComponent } from './components/journal/views/student-journal-view/student-day-toast/student-day-toast.component';
+import { TeacherDayToastComponent } from './components/journal/views/teacher-journal-view/teacher-day-toast/teacher-day-toast.component';
+import { TotalMarksDialogComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/total-marks-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,9 @@ import { LessonMarksDialogComponent } from './components/journal/views/teacher-j
     StudentJournalViewComponent,
     TeacherJournalViewComponent,
     LessonMarksDialogComponent,
+    StudentDayToastComponent,
+    TeacherDayToastComponent,
+    TotalMarksDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,7 @@ import { LessonMarksDialogComponent } from './components/journal/views/teacher-j
     MatSelectModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatIconModule,
     DragDropModule,
     FormsModule
   ],

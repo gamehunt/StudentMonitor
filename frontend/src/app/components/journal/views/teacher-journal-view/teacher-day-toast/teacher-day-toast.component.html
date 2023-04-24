@@ -5,22 +5,25 @@
   <mat-card-header
     [ngStyle]="{ 'background-color': isActive ? '#b35c00' : '#00548b' }"
   >
-<mat-card-title>{{ getDate() }}</mat-card-title>
+    <mat-card-title>{{ getDate() }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list role="list">
       <ng-container *ngFor="let lesson of lessons; index as i">
-        <mat-list-item role="listitem" class="lesson">
+        <mat-list-item role="listitem" class="lesson" (click)="handleLessonClick(lesson)">
           <div class="lesson-wrapper">
             <div>{{ i + 1 }}.</div>
-            <button
-              mat-button
-              color="primary"
+            <div
+              class="lesson-inner-wrapper"
               *ngIf="lesson != null; else empty"
-              (click)="handleLessonClick(lesson)"
             >
-              {{ lesson.lesson.name }}
-            </button>
+              <div class="group">
+                {{lesson.group.name}}
+              </div>
+              <div>
+                {{ lesson.lesson.name }}
+              </div>
+            </div>
           </div>
         </mat-list-item>
         <mat-divider></mat-divider>

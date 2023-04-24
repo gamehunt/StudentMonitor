@@ -1,5 +1,6 @@
 import { WeekLessons } from "shared";
 import { LessonOrder } from "./entity/LessonOrder";
+import { User } from "./entity/User";
 
 export function toBoolean(value: string) {
     switch(value?.toLowerCase()?.trim()){
@@ -22,4 +23,9 @@ export function sparseArray(lessons: LessonOrder[]) {
         }
     }
     return result;
+}
+
+export function removePassword(user: User) {
+    user.password = undefined
+    return user;
 }

@@ -5,6 +5,7 @@
   <button matSuffix mat-icon-button aria-label="Reset" (click)="reset()">
     <mat-icon>close</mat-icon>
   </button>
+  <button mat-raised-button color="primary" (click)="openTotalMarks()">Ведомость</button>
 </mat-toolbar>
 <mat-grid-list
   [cols]="isSmallScreen ? 1 : 3"
@@ -14,12 +15,12 @@
 >
   <mat-grid-tile *ngFor="let day of [0, 1, 2, 3, 4, 5]">
     <div class="day-toast-wrapper">
-      <app-journal-day-toast
+      <teacher-day-toast
         [isActive]="checkIsActive(day)"
         [date]="offsetInWeek(day)"
         [lessons]="lessons[day]"
         (lessonClicked)="handleLessonClick($event)"
-      ></app-journal-day-toast>
+      ></teacher-day-toast>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

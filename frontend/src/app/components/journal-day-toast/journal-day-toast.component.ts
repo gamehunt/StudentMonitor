@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { DayLessons, Lesson, LessonOrder } from 'shared';
+import { DayLessons, JournalEntry, Lesson, LessonOrder } from 'shared';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 export class LessonClickData {
@@ -9,12 +9,12 @@ export class LessonClickData {
 }
 
 @Component({
-  selector: 'app-journal-day-toast',
+  selector: 'journal-day-toast',
   templateUrl: './journal-day-toast.component.html',
   styleUrls: ['./journal-day-toast.component.scss']
 })
 export class JournalDayToastComponent {
-    constructor(private lessonsService: LessonsService, @Inject(MAT_DATE_LOCALE) private _locale: string) {}
+    constructor(@Inject(MAT_DATE_LOCALE) private _locale: string) {}
 
     @Input()
     date: Date = new Date()
@@ -34,7 +34,10 @@ export class JournalDayToastComponent {
         return weekday.charAt(0).toUpperCase()+ weekday.slice(1);
     }
 
-    handleLessonClick(data: LessonOrder) {
+    handleLessonClick(data: LessonOrder | null) {
+        if(!data) {
+            return;
+        }
         this.lessonClicked.emit({lesson: data, date: this.date})
     }
 }

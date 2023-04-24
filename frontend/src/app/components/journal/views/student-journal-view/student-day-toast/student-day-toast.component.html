@@ -1,0 +1,53 @@
+<mat-card
+  class="day-card"
+  [ngStyle]="{ 'background-color': isActive ? '#fc8400' : '#008ae6' }"
+>
+  <mat-card-header
+    [ngStyle]="{ 'background-color': isActive ? '#b35c00' : '#00548b' }"
+  >
+    <mat-card-title>{{ getDate() }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      <ng-container *ngFor="let lesson of lessons; index as i">
+        <mat-list-item
+          role="listitem"
+          class="lesson"
+          (click)="handleLessonClick(lesson)"
+        >
+          <div class="lesson-wrapper">
+            <div>{{ i + 1 }}.</div>
+            <div
+              class="lesson-inner-wrapper"
+              *ngIf="lesson != null; else empty"
+            >
+              <div class="lesson-name">
+                {{ lesson.lesson.name }}
+              </div>
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Existance icon"
+                fontIcon="done"
+                *ngIf="was(lesson); else wasnt"
+                class="was-icon"
+              ></mat-icon>
+              <ng-template #wasnt>
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Existance icon"
+                  fontIcon="close"
+                  class="wasnt-icon"
+                ></mat-icon>
+              </ng-template>
+            </div>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #empty>
+  <div class="empty-lesson">-</div>
+</ng-template>

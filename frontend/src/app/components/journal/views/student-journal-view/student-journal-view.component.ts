@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { WeekLessons } from 'shared';
+import { JournalEntry, LessonOrder, WeekLessons, getMonday } from 'shared';
+import { JournalService } from 'src/app/services/journal.service';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,27 +16,21 @@ export class StudentJournalViewComponent {
     isSmallScreen: boolean = false
 
     lessons: WeekLessons = []
+    marks: JournalEntry[] = []
 
     monday: Date = new Date()
 
     currentDate: Date = new Date();
     currentTime: Date = new Date();
 
-    constructor(private userService: UserService, private lessonsService: LessonsService) {}
+    constructor(private userService: UserService, private lessonsService: LessonsService, private journalService: JournalService) {}
 
     ngOnInit() {
         this.refresh()
     }
 
     ngOnChanges(){
-        this.monday = this.getMonday(this.currentDate)
-    }
-
-    getMonday(d: Date) {
-        d = new Date(d);
-        var day = d.getDay(),
-            diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-        return new Date(d.setDate(diff));
+        this.monday = getMonday(this.currentDate)
     }
     
     offsetInWeek(amount: number) : Date{
@@ -56,13 +51,22 @@ export class StudentJournalViewComponent {
     }
 
     refresh(){
-        this.monday = this.getMonday(this.currentDate)
+        this.monday = getMonday(this.currentDate)
         if(this.userService.isLoggedIn()){
             this.lessonsService.getLessonsForWeek(false, this.userService.getUser().group).subscribe((r) => {
                 if(r.ok){
                     this.lessons = r.data!;
                 }
             })
+            this.journalService.getMarksForStudent(this.userService.getUser(), this.monday).subscribe(data => {
+                if(data.ok) {
+                    this.marks = data.data!
+                }
+            })
         }
+    }
+
+    marksForDay(date: Date) {
+        return this.marks.filter(v => (v.date as unknown as number) == date.getTime()) ?? []
     }
 }

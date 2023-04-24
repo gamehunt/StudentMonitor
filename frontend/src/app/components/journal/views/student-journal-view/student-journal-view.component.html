@@ -14,11 +14,12 @@
 >
   <mat-grid-tile *ngFor="let day of [0, 1, 2, 3, 4, 5]">
     <div class="day-toast-wrapper">
-      <app-journal-day-toast
+      <student-day-toast
         [isActive]="checkIsActive(day)"
         [date]="offsetInWeek(day)"
         [lessons]="lessons[day]"
-      ></app-journal-day-toast>
+        [marks]="marksForDay(offsetInWeek(day))"
+      ></student-day-toast>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

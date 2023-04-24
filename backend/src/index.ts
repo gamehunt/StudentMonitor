@@ -19,6 +19,7 @@ import { ROLES_ROUTER } from "./routers/RolesRouter";
 import { GROUPS_ROUTER } from "./routers/GroupsRouter";
 import { USER_PROVIDER, LESSON_PROVIDER } from "./providers/config";
 import { LESSONS_ROUTER } from "./routers/LessonsRouter";
+import { JOURNAL_ROUTER } from "./routers/JournalRouter";
 
 dotenv.config();
 
@@ -127,6 +128,7 @@ AppDataSource.initialize().then(async () => {
     root_router.use('/roles',   ROLES_ROUTER)
     root_router.use('/groups',  GROUPS_ROUTER)
     root_router.use('/lessons', LESSONS_ROUTER)
+    root_router.use('/journal', JOURNAL_ROUTER)
 
     app.listen(port, () => {
         console.log(`Listening on port ${port}`);

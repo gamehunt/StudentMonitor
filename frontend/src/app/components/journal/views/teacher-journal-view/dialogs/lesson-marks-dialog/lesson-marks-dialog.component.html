@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Lesson marks</h1>
 <div mat-dialog-content>
-    <mat-selection-list #studentslist>
-        <mat-list-option *ngFor="let student of students">
+    <mat-selection-list #studentslist (selectionChange)="updateMarks($event)">
+        <mat-list-option *ngFor="let student of students" [value]="student" [selected]="was(student)">
           {{ student.fio }}
         </mat-list-option>
       </mat-selection-list>

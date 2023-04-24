@@ -47,6 +47,13 @@ export class LessonOrder {
     is_even!: boolean
 }
 
+export class JournalEntry {
+    date!: Date
+    lesson!: LessonOrder
+    student!: User
+    was!: boolean
+}
+
 export type DayLessons  = (LessonOrder | null) []
 export type WeekLessons = DayLessons []
 
@@ -81,4 +88,18 @@ export function checkPermissions(roleOrPerms: Role | number, permissions: number
     return (roleOrPerms.permissions & permissions) != 0;
 }
 
+export function getMonday(d: Date): Date {
+    d = new Date(d);
+    let day = d.getDay(),
+        diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+    let date = new Date(d.setDate(diff))
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
 
+export function timestampToDate(timestamp: string | number) : Date {
+    if(typeof timestamp === 'number') {
+        return new Date(timestamp)
+    }
+    return timestampToDate(parseInt(timestamp))
+}
