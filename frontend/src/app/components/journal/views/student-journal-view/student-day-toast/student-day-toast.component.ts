@@ -14,4 +14,9 @@ export class StudentDayToastComponent extends JournalDayToastComponent{
     was(data: LessonOrder) {
         return this.marks.find(e => e.lesson.id == data.id)?.was != undefined
     }
+
+    getName(name: string) : string{
+        let fio = name.split(" ");
+        return fio[0] + '.' + fio[1][0] + '.' + fio[2][0]
+    }
 }

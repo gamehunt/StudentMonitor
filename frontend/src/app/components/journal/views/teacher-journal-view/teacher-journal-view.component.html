@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <input matInput [matDatepicker]="picker" [(ngModel)]="currentDate" />
+  <input matInput [matDatepicker]="picker" [(ngModel)]="currentDate" (dateChange)="ngOnChanges()"/>
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
   <button matSuffix mat-icon-button aria-label="Reset" (click)="reset()">

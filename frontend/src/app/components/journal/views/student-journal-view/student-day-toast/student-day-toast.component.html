@@ -21,6 +21,9 @@
               class="lesson-inner-wrapper"
               *ngIf="lesson != null; else empty"
             >
+              <div class="teacher">
+                {{ getName(lesson.teacher.fio) }}
+              </div>
               <div class="lesson-name">
                 {{ lesson.lesson.name }}
               </div>
