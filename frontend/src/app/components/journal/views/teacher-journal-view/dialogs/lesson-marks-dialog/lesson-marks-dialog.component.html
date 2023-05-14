@@ -4,7 +4,7 @@
         <mat-list-option *ngFor="let student of students" [value]="student" [selected]="was(student)">
           {{ student.fio }}
         </mat-list-option>
-      </mat-selection-list>
+    </mat-selection-list>
 </div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Apply</button>

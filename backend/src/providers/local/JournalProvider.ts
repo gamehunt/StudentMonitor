@@ -32,7 +32,7 @@ export class JournalProvider {
         )
     }
 
-    async getMarksForStudent(monday: Date, user: User) {
+    async getMarksForStudent(monday: Date, user: User): Promise<JournalEntry[]> {
         let weekEnd = new Date(monday)
         weekEnd.setDate(weekEnd.getDate() + 7)
         return (await AppDataSource.getRepository(JournalEntry)
@@ -43,5 +43,21 @@ export class JournalProvider {
                     return e;
                 }
             )
+    }
+
+    async getAllMarks(start: Date, end: Date, group: Group, user: User | undefined = undefined): Promise<JournalEntry[]> {
+        let data = (await AppDataSource.getRepository(JournalEntry)
+            .find({ where: { date: Between(start, end) }, relations: ['lesson', 'student', 'student.group'] }))
+            .filter(e => e.student.group.id == group.id)
+            .map(
+                e => {
+                    e.student = removePassword(e.student)
+                    return e;
+                }
+            )
+        if(user) {
+            data = data.filter(e => e.student.id == user.id)
+        }
+        return data
     }
 }

@@ -69,7 +69,7 @@ export class TeacherJournalViewComponent {
 
     openTotalMarks() {
         const dialogRef = this.dialog.open(TotalMarksDialogComponent, {
-            
+
         })
         dialogRef.afterClosed().subscribe(data => {
 

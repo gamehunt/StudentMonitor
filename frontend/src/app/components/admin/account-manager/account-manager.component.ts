@@ -25,13 +25,13 @@ export class AccountManagerComponent extends BaseManagerComponent {
         'actions'
     ]
 
-    constructor(private userService: UserService, 
-                private accountsService: AccountsService, 
+    constructor(private userService: UserService,
+                private accountsService: AccountsService,
                 public override dialog: MatDialog){
         super(dialog)
     }
 
-    refresh(): void { 
+    refresh(): void {
         if(!this.userService.isLoggedIn()){
             return;
         }

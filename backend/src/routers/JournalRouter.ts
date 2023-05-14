@@ -1,9 +1,10 @@
 import express from "express";
-import { checkPermissions, getMonday, TEACHER, timestampToDate } from "shared";
+import { checkPermissions, getMonday, JournalEntry, TEACHER, timestampToDate, TotalMarks } from "shared";
 import { User } from "../entity/User";
 import { GROUP_PROVIDER, JOURNAL_PROVIDER, LESSON_PROVIDER, USER_PROVIDER } from "../providers/config";
 import { LessonOrder } from "../entity/LessonOrder";
 import { toBoolean } from "../utils";
+import { GroupProvider } from "../providers/local/GroupProvider";
 
 export const JOURNAL_ROUTER = express.Router()
 
@@ -74,3 +75,36 @@ JOURNAL_ROUTER.get('/students/:student/:date', async(req, res) => {
         return e
     })})
 })
+
+JOURNAL_ROUTER.route('/total/:group')
+    .get(async (req, res) => {
+        let start: Date = req.query['start'] ? new Date(timestampToDate(req.query['start'] as string)) : undefined
+        let end: Date   = req.query['end'] ? new Date(timestampToDate(req.query['end'] as string)) : undefined
+        if(!start){
+            start = new Date()
+            start.setMonth(0)
+            start.setDate(1)
+        }
+        
+        if(!end) {
+            end = new Date()
+            end.setMonth(11)
+            end.setDate(31)
+        }
+
+        let user = undefined
+        if(req.query['user']) {
+            user = await USER_PROVIDER.getUserById(parseInt(req.query['user'] as string))
+        }
+        
+        let group = await GROUP_PROVIDER.getGroupById(parseInt(req.params.group))
+        if(!group) {
+            res.sendStatus(400)
+            return;
+        }
+
+        let data: TotalMarks = new TotalMarks()
+        data.marks        = await JOURNAL_PROVIDER.getAllMarks(start, end, group, user)
+        data.total_missed = data.marks.filter(e => !e.was).length * 2
+        res.send({ok: true, data: data})
+    })

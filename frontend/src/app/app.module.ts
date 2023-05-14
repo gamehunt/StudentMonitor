@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -100,6 +101,7 @@ import { TotalMarksDialogComponent } from './components/journal/views/teacher-jo
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
+    MatSliderModule,
     DragDropModule,
     FormsModule
   ],

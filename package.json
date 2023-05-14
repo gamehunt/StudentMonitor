@@ -2,4 +2,4 @@
     "name": "student-monitor",
     "private": true,
     "workspaces": ["shared"]
-  }
+}

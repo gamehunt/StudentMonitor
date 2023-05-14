@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Group, JournalEntry, LessonOrder, User, Response } from 'shared';
+import { Group, JournalEntry, LessonOrder, User, Response, TotalMarks } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,13 @@ export class JournalService {
 
   getMarksForStudent(user: User, day: Date): Observable<Response<JournalEntry[]>> {
     return this.http.get<Response<JournalEntry[]>>(`/api/journal/students/${user.id}/${day.getTime()}`)
+  }
+
+  getTotalMarks(start: Date, end: Date, group: Group, user: User | undefined) {
+    let query = `/api/journal/total/${group.id}?start=${start.getTime()}&end=${end.getTime()}`
+    if(user){
+        query += `&user=${user.id}`
+    }
+    return this.http.get<Response<TotalMarks>>(query)
   }
 }

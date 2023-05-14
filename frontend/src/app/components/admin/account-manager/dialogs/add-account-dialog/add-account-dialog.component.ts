@@ -10,7 +10,7 @@ export interface DialogData {
     fio: string,
     role: any
   }
-  
+
 
 @Component({
   selector: 'app-add-account-dialog',

@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+mat-toolbar {
+    height: 48px;
+    gap: 5px;
+}
+
+table {
+    width: 100%;
+}
+
+.table-wrapper {
+    margin-top: 5px;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.mat-column-student {
+    border-right: 1px solid black;
+}

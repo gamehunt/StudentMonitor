@@ -29,11 +29,16 @@ export class LessonMarksDialogComponent {
             if(data.ok) {
                 this.students = data.data!
             }
-        })
-        this.journalService.getMarksForGroup(this.data.lesson.group, this.data.date).subscribe(data => {
-            if(data.ok) {
-                this.marks = data.data!
-            }
+            this.journalService.getMarksForGroup(this.data.lesson.group, this.data.date).subscribe(data => {
+                if(data.ok) {
+                    this.marks = data.data!
+                }
+                for(let e of this.students) {
+                    if(!this.was(e)) {
+                        this.journalService.updateMarks(e, this.data.date, this.data.lesson, false).subscribe(_ => {})
+                    }
+                }
+            })
         })
     }
 

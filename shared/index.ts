@@ -54,6 +54,11 @@ export class JournalEntry {
     was!: boolean
 }
 
+export class TotalMarks {
+    marks!:        JournalEntry[]
+    total_missed!: number
+}
+
 export type DayLessons  = (LessonOrder | null) []
 export type WeekLessons = DayLessons []
 
