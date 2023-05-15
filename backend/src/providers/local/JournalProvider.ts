@@ -5,6 +5,7 @@ import { JournalEntry } from "../../entity/JournalEntry";
 import { LessonOrder } from "../../entity/LessonOrder";
 import { User } from "../../entity/User";
 import { removePassword } from "../../utils";
+import { Lesson } from "../../entity/Lesson";
 
 
 export class JournalProvider {
@@ -45,10 +46,10 @@ export class JournalProvider {
             )
     }
 
-    async getAllMarks(start: Date, end: Date, group: Group, user: User | undefined = undefined): Promise<JournalEntry[]> {
+    async getAllMarks(start: Date, end: Date, group: Group, lesson: Lesson | undefined = undefined, user: User | undefined = undefined): Promise<JournalEntry[]> {
         let data = (await AppDataSource.getRepository(JournalEntry)
             .find({ where: { date: Between(start, end) }, relations: ['lesson', 'student', 'student.group'] }))
-            .filter(e => e.student.group.id == group.id)
+            .filter(e => e.student.group.id == group.id && (!lesson || e.lesson.id == lesson.id))
             .map(
                 e => {
                     e.student = removePassword(e.student)

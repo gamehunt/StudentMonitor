@@ -17,6 +17,14 @@
         }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Предмет</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let student of [1, 2, 3, 4, 5]">{{
+            student
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
     <input matInput [matDatepicker]="picker1" />
     <mat-datepicker-toggle
       matIconSuffix

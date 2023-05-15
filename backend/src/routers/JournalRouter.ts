@@ -5,6 +5,8 @@ import { GROUP_PROVIDER, JOURNAL_PROVIDER, LESSON_PROVIDER, USER_PROVIDER } from
 import { LessonOrder } from "../entity/LessonOrder";
 import { toBoolean } from "../utils";
 import { GroupProvider } from "../providers/local/GroupProvider";
+import { Group } from "../entity/Group";
+import { Lesson } from "../entity/Lesson";
 
 export const JOURNAL_ROUTER = express.Router()
 
@@ -76,35 +78,72 @@ JOURNAL_ROUTER.get('/students/:student/:date', async(req, res) => {
     })})
 })
 
-JOURNAL_ROUTER.route('/total/:group')
-    .get(async (req, res) => {
-        let start: Date = req.query['start'] ? new Date(timestampToDate(req.query['start'] as string)) : undefined
-        let end: Date   = req.query['end'] ? new Date(timestampToDate(req.query['end'] as string)) : undefined
-        if(!start){
-            start = new Date()
-            start.setMonth(0)
-            start.setDate(1)
-        }
-        
-        if(!end) {
-            end = new Date()
-            end.setMonth(11)
-            end.setDate(31)
-        }
+class TotalMarksReqData {
+    valid!: boolean
+    start?: Date
+    end?: Date
+    group?: Group
+    user?: User | undefined
+}
 
-        let user = undefined
-        if(req.query['user']) {
-            user = await USER_PROVIDER.getUserById(parseInt(req.query['user'] as string))
-        }
-        
-        let group = await GROUP_PROVIDER.getGroupById(parseInt(req.params.group))
-        if(!group) {
+async function parseTotalMarksQuery(req): Promise<TotalMarksReqData> {
+    let start: Date = req.query['start'] ? new Date(timestampToDate(req.query['start'] as string)) : undefined
+    let end: Date   = req.query['end'] ? new Date(timestampToDate(req.query['end'] as string)) : undefined
+    if(!start){
+        start = new Date()
+        start.setMonth(0)
+        start.setDate(1)
+    }
+    
+    if(!end) {
+        end = new Date()
+        end.setMonth(11)
+        end.setDate(31)
+    }
+
+    let user = undefined
+    if(req.query['user']) {
+        user = await USER_PROVIDER.getUserById(parseInt(req.query['user'] as string))
+    }
+    
+    let group = await GROUP_PROVIDER.getGroupById(parseInt(req.params.group))
+    if(!group) {
+        return {valid: false};
+    }
+
+    return {valid: true, start: start, end: end, group: group, user: user}
+}
+
+JOURNAL_ROUTER.route('/total/:group/')
+    .get(async (req, res) => {
+        let reqd: TotalMarksReqData = await parseTotalMarksQuery(req)
+        if(!reqd.valid) {
             res.sendStatus(400)
-            return;
+            return
         }
 
         let data: TotalMarks = new TotalMarks()
-        data.marks        = await JOURNAL_PROVIDER.getAllMarks(start, end, group, user)
+        data.marks        = await JOURNAL_PROVIDER.getAllMarks(reqd.start, reqd.end, reqd.group, undefined, reqd.user)
+        data.total_missed = data.marks.filter(e => !e.was).length * 2
+        res.send({ok: true, data: data})
+    })
+
+    JOURNAL_ROUTER.route('/total/:group/:lesson')
+    .get(async (req, res) => {
+        let reqd = await parseTotalMarksQuery(req)
+        if(reqd!) {
+            res.sendStatus(400)
+            return
+        }
+
+        let lesson: Lesson = await LESSON_PROVIDER.getLessonsById(parseInt(req.params.lesson))
+        if(!lesson) {
+            res.sendStatus(400)
+            return
+        }
+
+        let data: TotalMarks = new TotalMarks()
+        data.marks        = await JOURNAL_PROVIDER.getAllMarks(reqd.start, reqd.end, reqd.group, lesson, reqd.user)
         data.total_missed = data.marks.filter(e => !e.was).length * 2
         res.send({ok: true, data: data})
     })
