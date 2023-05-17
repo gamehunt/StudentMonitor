@@ -108,3 +108,15 @@ export function timestampToDate(timestamp: string | number) : Date {
     }
     return timestampToDate(parseInt(timestamp))
 }
+
+declare global {
+    interface Array<T> {
+        unique(equalityPredicate?: (a: T, b: T) => boolean): Array<T>;
+    }
+  }
+  
+  if (!Array.prototype.unique) {
+    Array.prototype.unique = function<T>(this: T[], pred?: (a: T, b: T) => boolean): T[] {
+      return this.filter((e, i, a) => a.findIndex(ee => (pred ? pred(e, ee) : ee == e)) == i);
+    }
+  }
