@@ -46,19 +46,16 @@ export class JournalProvider {
             )
     }
 
-    async getAllMarks(start: Date, end: Date, group: Group, lesson: Lesson | undefined = undefined, user: User | undefined = undefined): Promise<JournalEntry[]> {
+    async getAllMarks(start: Date, end: Date, group: Group, lesson: Lesson): Promise<JournalEntry[]> {
         let data = (await AppDataSource.getRepository(JournalEntry)
-            .find({ where: { date: Between(start, end) }, relations: ['lesson', 'student', 'student.group'] }))
-            .filter(e => e.student.group.id == group.id && (!lesson || e.lesson.id == lesson.id))
+            .find({ where: { date: Between(start, end) }, relations: ['lesson', 'lesson.lesson', 'student', 'student.group'] }))
+            .filter(e => e.student.group.id == group.id && e.lesson.lesson.id == lesson.id)
             .map(
                 e => {
                     e.student = removePassword(e.student)
                     return e;
                 }
             )
-        if(user) {
-            data = data.filter(e => e.student.id == user.id)
-        }
         return data
     }
 }

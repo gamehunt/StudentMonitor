@@ -1,7 +1,4 @@
-@use '@angular/material' as mat;
-
 mat-toolbar {
-    height: 48px;
     gap: 5px;
 }
 
@@ -15,6 +12,29 @@ table {
     overflow: auto;
 }
 
+
+
 .mat-column-student {
     border-right: 1px solid black;
+}
+
+.was-cell, .date-header {
+    text-align: center;
+}
+
+.was-cell.wasnt {
+    border: 1px solid red;
+    .icon {
+        color: red;
+    }
+} 
+
+.was-cell.was {
+    .icon {
+        color: rgb(10, 212, 10);
+    }
+}
+
+.current-date {
+    background-color: orange;
 }

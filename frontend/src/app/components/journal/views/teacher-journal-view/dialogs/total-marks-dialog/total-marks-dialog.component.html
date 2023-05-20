@@ -3,45 +3,51 @@
   <mat-toolbar>
     <mat-form-field appearance="fill">
       <mat-label>Группа</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let student of [1, 2, 3, 4, 5]">{{
-          student
+      <mat-select [(ngModel)]="currentGroup">
+        <mat-option *ngFor="let group of getGroups()" [value]="group">{{
+          group.name
         }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-      <mat-label>Студент</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let student of [1, 2, 3, 4, 5]">{{
-          student
+      <mat-label>Предмет</mat-label>
+      <mat-select [(ngModel)]="currentLesson">
+        <mat-option *ngFor="let lesson of getLessons()" [value]="lesson">{{
+          lesson.name
         }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Предмет</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let student of [1, 2, 3, 4, 5]">{{
-            student
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    <input matInput [matDatepicker]="picker1" />
-    <mat-datepicker-toggle
-      matIconSuffix
-      [for]="picker1"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-    <button matSuffix mat-icon-button aria-label="Reset" (click)="resetStart()">
-      <mat-icon>close</mat-icon>
-    </button>
-    <input matInput [matDatepicker]="picker2" />
-    <mat-datepicker-toggle
-      matIconSuffix
-      [for]="picker2"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-    <button matSuffix mat-icon-button aria-label="Reset" (click)="resetEnd()">
-      <mat-icon>close</mat-icon>
+    <mat-form-field>
+      <mat-label>Start</mat-label>
+      <input matInput [matDatepicker]="picker1" [(ngModel)]="start" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker1"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Reset"
+        (click)="resetStart()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>End</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="end" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+      <button matSuffix mat-icon-button aria-label="Reset" (click)="resetEnd()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="fetchData()">
+      Fetch
     </button>
     <button mat-raised-button color="primary">Print</button>
   </mat-toolbar>
@@ -53,14 +59,49 @@
       </ng-container>
       <ng-container matColumnDef="student">
         <th mat-header-cell *matHeaderCellDef>Student</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.student.fio }}</td>
       </ng-container>
       <ng-container
-        *ngFor="let a of ['1', '2', '3', '4', '5', '6']"
+        *ngFor="let a of [1, 2, 3, 4, 5, 6]"
         [matColumnDef]="'date' + a"
       >
-        <th mat-header-cell *matHeaderCellDef>Date {{ a }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="date-header"
+          [ngClass]="{
+            'current-date': isCurrentDate(this.getDatesForCurrentPage()[a - 1])
+          }"
+        >
+          {{ formatDate(this.getDatesForCurrentPage()[a - 1]) }}
+        </th>
+        <div *ngIf="this.getDatesForCurrentPage()[a - 1]; else empty">
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="was-cell"
+            [ngClass]="{ was: element.was[a - 1], wasnt: !element.was[a - 1] }"
+          >
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Existance icon"
+              fontIcon="done"
+              *ngIf="element.was[a - 1]; else wasnt"
+              class="icon"
+            ></mat-icon>
+            <ng-template #wasnt>
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Existance icon"
+                fontIcon="close"
+                class="icon"
+              ></mat-icon>
+            </ng-template>
+          </td>
+        </div>
+        <ng-template #empty> 
+            <td mat-cell *matCellDef="let _"></td>
+        </ng-template>
       </ng-container>
       <tr
         mat-header-row
@@ -96,16 +137,16 @@
       ></tr>
     </table>
   </div>
-  <mat-slider
-    min="0"
-    max="100000"
-    step="1000"
-    showTickMarks
-    discrete
-    [displayWith]="formatLabel"
+  <mat-paginator
+    [length]="getDateAmount()"
+    [pageSize]="6"
+    [pageSizeOptions]="[6]"
+    [hidePageSize]="true"
+    [pageIndex]="currentPage"
+    (page)="changePage($event)"
+    aria-label="Select page"
   >
-    <input matSliderThumb />
-  </mat-slider>
+  </mat-paginator>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
