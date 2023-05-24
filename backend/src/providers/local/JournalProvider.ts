@@ -55,7 +55,7 @@ export class JournalProvider {
                     e.student = removePassword(e.student)
                     return e;
                 }
-            )
+            ).sort((a, b) => a.id - b.id)
         return data
     }
 }

@@ -12,8 +12,6 @@ table {
     overflow: auto;
 }
 
-
-
 .mat-column-student {
     border-right: 1px solid black;
 }
@@ -37,4 +35,8 @@ table {
 
 .current-date {
     background-color: orange;
+}
+
+.missed-stats {
+    margin-top: 15px;
 }

@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <table>
+    <tr class="header-row">
+      <th>Студент</th>
+      <th *ngFor="let e of data.dates" class="date-header">
+        {{ formatDate(e) }}
+      </th>
+      <th class="missed-header">Пропущено (ч.)</th>
+    </tr>
+    <tr *ngFor="let e of data.data">
+      <td class="fio-column">{{ e.student.fio }}</td>
+      <td *ngFor="let _ of data.dates; let i = index" class="was-column">
+        {{ e.was[i] ? "." : "Н" }}
+      </td>
+      <td class="missed-column">{{ e.missed }}</td>
+    </tr>
+  </table>
+</div>

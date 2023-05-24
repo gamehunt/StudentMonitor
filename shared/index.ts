@@ -48,6 +48,7 @@ export class LessonOrder {
 }
 
 export class JournalEntry {
+    id!: number
     date!: Date
     lesson!: LessonOrder
     student!: User
@@ -61,6 +62,17 @@ export class TotalMarks {
 
 export type DayLessons  = (LessonOrder | null) []
 export type WeekLessons = DayLessons []
+
+export function formatDate(d: Date, locale: Intl.LocalesArgument) {
+    if (!d) {
+      return '';
+    }
+    return new Date(d).toLocaleDateString(locale, {
+      year: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+    });
+}
 
 export function isAdmin(roleOrPerms: Role | number) : boolean {
     if(typeof roleOrPerms === 'number'){

@@ -49,6 +49,8 @@ import { LessonMarksDialogComponent } from './components/journal/views/teacher-j
 import { StudentDayToastComponent } from './components/journal/views/student-journal-view/student-day-toast/student-day-toast.component';
 import { TeacherDayToastComponent } from './components/journal/views/teacher-journal-view/teacher-day-toast/teacher-day-toast.component';
 import { TotalMarksDialogComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/total-marks-dialog.component';
+import { PrintLayoutComponent } from './components/print-layout/print-layout.component';
+import { PrintFormComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/print-form/print-form.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { TotalMarksDialogComponent } from './components/journal/views/teacher-jo
     StudentDayToastComponent,
     TeacherDayToastComponent,
     TotalMarksDialogComponent,
+    PrintLayoutComponent,
+    PrintFormComponent,
   ],
   imports: [
     BrowserModule,

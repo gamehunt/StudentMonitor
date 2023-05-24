@@ -50,6 +50,7 @@ export class TeacherJournalViewComponent {
         this.currentDate = new Date()
     }
 
+
     refresh(){
         this.monday = getMonday(this.currentDate)
         if(this.userService.isLoggedIn()){
