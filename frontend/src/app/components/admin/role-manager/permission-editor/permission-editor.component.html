@@ -1,0 +1,5 @@
+<mat-selection-list (selectionChange)="updatePermissions($event)" #perms>
+    <mat-list-option *ngFor="let perm of getPermissions()" [selected]="has(perm)" [value]="perm">
+      {{ permissionToString(perm) }}
+    </mat-list-option>
+</mat-selection-list>

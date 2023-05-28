@@ -19,7 +19,7 @@ export class PrintFormComponent {
     }
 
     ngOnInit() {
-        this.data = JSON.parse(this.route.snapshot.params['data'])
+        this.data = JSON.parse(this.printSvc.getPrintData())
         this.printSvc.endPrint()
     }
 }

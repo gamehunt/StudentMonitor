@@ -1,15 +1,18 @@
 
 FROM node:16-slim as build
 
-WORKDIR /usr/local/site/frontend
-
-COPY package*.json /usr/local/site/frontend/
-
 RUN apt-get update && apt-get install -y python && apt-get install -y build-essential
 
+WORKDIR /usr/local/site/shared
+COPY shared/package.json /usr/local/site/shared/
 RUN npm install
+COPY shared/ /usr/local/site/shared/
+RUN npm run build
 
-COPY . /usr/local/site/frontend/
+WORKDIR /usr/local/site/frontend
+COPY frontend/package*.json /usr/local/site/frontend/
+RUN npm install
+COPY frontend/ /usr/local/site/frontend/
 RUN npm run build
 
 FROM nginx:1.17.1

@@ -1,0 +1,13 @@
+<mat-drawer-container class="wrapper">
+    <mat-drawer mode="side" opened>
+        <mat-button-toggle-group name="nav" aria-label="Navigation" [vertical]="true">
+            <mat-button-toggle [routerLink]="'./accounts'">Accounts</mat-button-toggle>
+            <mat-button-toggle [routerLink]="'./roles'">Roles</mat-button-toggle>
+            <mat-button-toggle [routerLink]="'./groups'">Groups</mat-button-toggle>
+            <mat-button-toggle [routerLink]="'./lessons'">Lessons</mat-button-toggle>
+        </mat-button-toggle-group>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>

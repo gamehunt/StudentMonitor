@@ -14,10 +14,15 @@ export class PrintService {
   print(document: string, data: string, returnRoute: string) {
     this.inPrint = true
     this.returnRoute = returnRoute
+    localStorage.setItem('printData', data)
     this.router.navigate(['/_',
     { outlets: {
-      'print': ['print', document, data]
+      'print': ['print', document]
     }}]);
+  }
+
+  getPrintData() {
+    return localStorage.getItem('printData') ?? '{}'
   }
 
   endPrint() {

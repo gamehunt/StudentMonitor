@@ -8,10 +8,12 @@ import { ScheduleEditorComponent } from './components/admin/schedule-editor/sche
 import { JournalComponent } from './components/journal/journal.component';
 import { PrintLayoutComponent } from './components/print-layout/print-layout.component';
 import { PrintFormComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/print-form/print-form.component';
+import { AdminJournalViewComponent } from './components/admin/admin-journal-view/admin-journal-view.component';
 
 const routes: Routes = [
   { path: 'journal', component: JournalComponent },
   { path: 'managment',
+    component: AdminJournalViewComponent,
     children: [
         { path: 'accounts', component: AccountManagerComponent },
         { path: 'roles',    component: RoleManagerComponent },
@@ -27,7 +29,7 @@ const routes: Routes = [
         outlet: 'print',
         component: PrintLayoutComponent,
         children: [
-            { path: 'total_marks/:data', component: PrintFormComponent }
+            { path: 'total_marks', component: PrintFormComponent }
         ]
       },
     ]

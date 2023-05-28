@@ -23,6 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { JournalComponent } from './components/journal/journal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,6 +53,8 @@ import { TeacherDayToastComponent } from './components/journal/views/teacher-jou
 import { TotalMarksDialogComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/total-marks-dialog.component';
 import { PrintLayoutComponent } from './components/print-layout/print-layout.component';
 import { PrintFormComponent } from './components/journal/views/teacher-journal-view/dialogs/total-marks-dialog/print-form/print-form.component';
+import { AdminJournalViewComponent } from './components/admin/admin-journal-view/admin-journal-view.component';
+import { PermissionEditorComponent } from './components/admin/role-manager/permission-editor/permission-editor.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +85,8 @@ import { PrintFormComponent } from './components/journal/views/teacher-journal-v
     TotalMarksDialogComponent,
     PrintLayoutComponent,
     PrintFormComponent,
+    AdminJournalViewComponent,
+    PermissionEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +112,8 @@ import { PrintFormComponent } from './components/journal/views/teacher-journal-v
     MatCheckboxModule,
     MatIconModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatButtonToggleModule,
     DragDropModule,
     FormsModule
   ],

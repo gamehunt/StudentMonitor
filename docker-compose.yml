@@ -2,7 +2,9 @@ version: '3'
 
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./
+      dockerfile: ./frontend/Dockerfile
     container_name: "student-monitor-frontend"
     restart: always
     environment:
@@ -19,7 +21,9 @@ services:
       - backend
 
   backend:
-    build: ./backend
+    build:
+      context: ./
+      dockerfile: ./backend/Dockerfile
     container_name: "student-monitor-backend"
     restart: always
     environment:

@@ -4,10 +4,10 @@
         <mat-label>Name</mat-label>
         <input matInput [(ngModel)]="data.name">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Permissions</mat-label>
-        <input matInput [(ngModel)]="data.permissions">
-    </mat-form-field >
+    <div class="permission-wrapper">
+        Permissions
+        <permission-editor [(permissions)]="data.permissions"></permission-editor>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Apply</button>

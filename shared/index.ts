@@ -6,6 +6,8 @@ export const ACCOUNT_MANAGMENT = (1 << 4);
 export const ROLE_MANAGMENT    = (1 << 5);
 export const TEACHER           = (1 << 6);
 
+export const PERMISSION_LIST = [ADMIN, GROUP_MANAGMENT, LESSON_MANAGMENT, STUDENT, ACCOUNT_MANAGMENT, ROLE_MANAGMENT, TEACHER]
+
 export class Response <T> {
     ok!: boolean
     data?: T
